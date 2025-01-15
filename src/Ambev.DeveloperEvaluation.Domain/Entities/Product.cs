@@ -27,9 +27,10 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
 
         public static Product Create(decimal price, string title, string description, string category, string image, ProductRating productRating)
         {
-
-
-            return new Product
+            ArgumentException.ThrowIfNullOrEmpty(title);
+			ArgumentException.ThrowIfNullOrEmpty(category);
+            
+			return new Product
             {
                 Price = price,
                 Title = title,
@@ -45,7 +46,10 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         
         public void Update(decimal price, string title, string description, string category, string image, ProductRating productRating)
         {
-            ProductRating = productRating;
+			ArgumentException.ThrowIfNullOrEmpty(title);
+			ArgumentException.ThrowIfNullOrEmpty(category);
+
+			ProductRating = productRating;
             Price = price;
             Title = title;
             Description = description;
