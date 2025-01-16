@@ -12,6 +12,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Mapping
 	{
 		public void Configure(EntityTypeBuilder<Product> builder)
 		{
+			builder.HasKey(x => x.Id);
 			builder.Property(x=> x.Id).ValueGeneratedOnAdd();
 			builder.Property(x=> x.Description).HasMaxLength(255).IsRequired();
 			builder.Property(x => x.Title).HasMaxLength(60).IsRequired();

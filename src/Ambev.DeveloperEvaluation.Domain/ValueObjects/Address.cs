@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Ambev.DeveloperEvaluation.Domain.ValueObjects
 {
 
-	public class Address
+	public record Address
 	{
 		public string City { get; set; } = string.Empty;
 		public string Street { get; set; } = string.Empty ;

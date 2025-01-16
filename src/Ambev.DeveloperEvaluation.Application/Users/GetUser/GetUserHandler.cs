@@ -6,9 +6,9 @@ using Ambev.DeveloperEvaluation.Domain.Repositories;
 namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 
 /// <summary>
-/// Handler for processing GetUserCommand requests
+/// Handler for processing GetUserQuery requests
 /// </summary>
-public class GetUserHandler : IRequestHandler<GetUserCommand, GetUserResult>
+public class GetUserHandler : IRequestHandler<GetUserQuery, GetUserResult>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ public class GetUserHandler : IRequestHandler<GetUserCommand, GetUserResult>
     /// </summary>
     /// <param name="userRepository">The user repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
-    /// <param name="validator">The validator for GetUserCommand</param>
+    /// <param name="validator">The validator for GetUserQuery</param>
     public GetUserHandler(
         IUserRepository userRepository,
         IMapper mapper)
@@ -28,12 +28,12 @@ public class GetUserHandler : IRequestHandler<GetUserCommand, GetUserResult>
     }
 
     /// <summary>
-    /// Handles the GetUserCommand request
+    /// Handles the GetUserQuery request
     /// </summary>
     /// <param name="request">The GetUser command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The user details if found</returns>
-    public async Task<GetUserResult> Handle(GetUserCommand request, CancellationToken cancellationToken)
+    public async Task<GetUserResult> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
         var validator = new GetUserValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
@@ -43,8 +43,8 @@ public class GetUserHandler : IRequestHandler<GetUserCommand, GetUserResult>
 
         var user = await _userRepository.GetByIdAsync(request.Id, cancellationToken);
         if (user == null)
-            throw new KeyNotFoundException($"User with ID {request.Id} not found");
-
-        return _mapper.Map<GetUserResult>(user);
+            throw new NotFoundException($"User with ID {request.Id} not found");
+        var result = _mapper.Map<GetUserResult>(user);
+		return result;
     }
 }

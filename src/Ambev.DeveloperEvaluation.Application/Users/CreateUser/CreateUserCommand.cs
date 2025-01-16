@@ -18,6 +18,8 @@ namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 /// <see cref="AbstractValidator{T}"/> to ensure that the fields are correctly 
 /// populated and follow the required rules.
 /// </remarks>
+/// 
+
 public class CreateUserCommand : IRequest<CreateUserResult>
 {
     /// <summary>
@@ -50,8 +52,10 @@ public class CreateUserCommand : IRequest<CreateUserResult>
     /// </summary>
     public UserRole Role { get; set; }
 
+    public Name Name { get; set; } = default!;
+    public AddressDto Address { get; set; } = default!;
 
-    public ValidationResultDetail Validate()
+	public ValidationResultDetail Validate()
     {
         var validator = new CreateUserCommandValidator();
         var result = validator.Validate(this);

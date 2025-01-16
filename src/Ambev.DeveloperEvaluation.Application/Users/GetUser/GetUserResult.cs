@@ -7,33 +7,22 @@ namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 /// </summary>
 public class GetUserResult
 {
-    /// <summary>
-    /// The unique identifier of the user
-    /// </summary>
-    public Guid Id { get; set; }
+	/// <summary>
+	/// The unique identifier of the user
+	/// </summary>
+	public Guid Id { get; set; } = default!;
+	public string Username { get; set; } = string.Empty;
 
-    /// <summary>
-    /// The user's full name
-    /// </summary>
-    public string Name { get; set; } = string.Empty;
+	public string Password { get; set; } = string.Empty;
 
-    /// <summary>
-    /// The user's email address
-    /// </summary>
-    public string Email { get; set; } = string.Empty;
+	public string Phone { get; set; } = string.Empty;
 
-    /// <summary>
-    /// The user's phone number
-    /// </summary>
-    public string Phone { get; set; } = string.Empty;   
+	public string Email { get; set; } = string.Empty;
 
-    /// <summary>
-    /// The user's role in the system
-    /// </summary>
-    public UserRole Role { get; set; }
+	public UserStatus Status { get; set; }
 
-    /// <summary>
-    /// The current status of the user
-    /// </summary>
-    public UserStatus Status { get; set; }
+	public UserRole Role { get; set; }
+
+	public Name Name { get; set; } = default!;
+	public AddressDto Address { get; set; } = default!;
 }
