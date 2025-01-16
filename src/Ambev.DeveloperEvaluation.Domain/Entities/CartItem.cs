@@ -1,11 +1,14 @@
-﻿namespace Ambev.DeveloperEvaluation.Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
-	public class CartItem
+	public class CartItem:Entity<int>
 	{
-        public int Id { get; set; }
+		[JsonIgnore]
         public int CartId { get;  set; }
-        public int ProductId { get; set; }
-		public int Quantity { get; private set; }		
+		[JsonIgnore]
+		public int ProductId { get; set; }
+		public int Quantity { get;  set; }		
 		public CartItem() { }
 
 

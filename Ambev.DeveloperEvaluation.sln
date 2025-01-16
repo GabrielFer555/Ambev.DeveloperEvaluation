@@ -8,9 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{BD3812F8-8783-42C6-B231-8A032EF9481F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{77C73D0D-E122-4C65-B63B-B89C8E28F69E}"
-	ProjectSection(SolutionItems) = preProject
-		src\Ambev.DeveloperEvaluation.Application\GlobalUsing.cs = src\Ambev.DeveloperEvaluation.Application\GlobalUsing.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplication", "Aplication", "{7DC3E4B1-675C-4122-AA58-4BCBA06C4A82}"
 EndProject

@@ -10,6 +10,7 @@ using Ambev.DeveloperEvaluation.Application.Users.GetAllUsers;
 using Ambev.DeveloperEvaluation.WebApi.Features.Users.ListUsers;
 using Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser;
 using Ambev.DeveloperEvaluation.Application.Users.UpdateUser;
+using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Users;
 
@@ -109,7 +110,6 @@ public class UsersController : ControllerBase
 
         return Ok(new ApiResponse
         {
-            Success = true,
             Message = "User deactivated successfully"
         });
     }
@@ -117,7 +117,12 @@ public class UsersController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllUsers([FromQuery] GetAllUsersRequest request, CancellationToken cancellationToken)
     {
-        var query = _mapper.Map<GetAllUsersQuery>(request);
+		var validator = new GetAllUsersValidator();
+		var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+		if (!validationResult.IsValid)
+			throw new ValidationException(validationResult.Errors);
+		var query = _mapper.Map<GetAllUsersQuery>(request);
         var result = await _mediator.Send(query, cancellationToken);
         var response = _mapper.Map<GetAllUsersResult>(result);
 

@@ -7,6 +7,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Mapping
 	{
 		public void Configure(EntityTypeBuilder<Cart> builder)
 		{
+			builder.ToTable(nameof(Cart));	
 			builder.Property(x => x.Id).ValueGeneratedOnAdd();
 			builder.HasIndex(x => x.Id);
 			builder.HasMany<CartItem>(c => c.Products).WithOne().HasForeignKey(ct => ct.CartId);

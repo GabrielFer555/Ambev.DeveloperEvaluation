@@ -67,12 +67,13 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 		}
 		public async Task<int> GetTotalPages(int pageSize, string? category )
 		{
-			var query = _context.Products;
+			var query = _context.Products.AsQueryable();
 			if(category is not null)
 			{
 				query.Where(x => x.Category == category);
 			}
-			var totalPages = (await query.CountAsync() / pageSize) == 0? 1: (await query.CountAsync() / pageSize);
+			var totalItems = await query.CountAsync();
+			var totalPages = (int)Math.Ceiling((decimal)totalItems / pageSize);
 			return totalPages;
 		
 		}

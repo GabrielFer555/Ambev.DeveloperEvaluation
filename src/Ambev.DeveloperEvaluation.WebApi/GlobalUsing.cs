@@ -10,6 +10,7 @@ global using Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
 global using Ambev.DeveloperEvaluation.Application.Users;
 global using Ambev.DeveloperEvaluation.Domain.Enums;
 global using Ambev.DeveloperEvaluation.Domain.Validation;
+global using Ambev.DeveloperEvaluation.Application.Carts;
 global using static Ambev.DeveloperEvaluation.Application.Users.NameValidator;
 global using AutoMapper;
 global using MediatR;

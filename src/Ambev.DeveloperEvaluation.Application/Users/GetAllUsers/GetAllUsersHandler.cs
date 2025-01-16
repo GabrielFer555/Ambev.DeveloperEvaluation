@@ -11,6 +11,12 @@ namespace Ambev.DeveloperEvaluation.Application.Users.GetAllUsers
 	{
 		public async Task<GetAllUsersResult> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
 		{
+			var validator = new GetAllUsersValidator();
+			var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+			if (!validationResult.IsValid)
+				throw new ValidationException(validationResult.Errors);
+
 			int page = request._Page??1;
 			int limit = request._Limit ?? 10; 
 

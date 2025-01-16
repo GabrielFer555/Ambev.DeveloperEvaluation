@@ -4,20 +4,9 @@
 	{
 		public GetAllUsersValidator()
 		{
-			RuleFor(x => x._Page).Must(IfNotNullMustBePositive);
-			RuleFor(x => x._Limit).Must(IfNotNullMustBePositive);
+			RuleFor(x => x._Page).GreaterThanOrEqualTo(1);
+			RuleFor(x => x._Limit).GreaterThanOrEqualTo(1);
 
-		}
-		public bool IfNotNullMustBePositive(int? number)
-		{
-			if (number.HasValue)
-			{
-				return number >= 1;
-			}
-			else
-			{
-				return true;
-			}
 		}
 	}
 }

@@ -53,7 +53,7 @@ public class UserRepository : IUserRepository
 	public async Task<int> GetTotalPages(int pageSize)
 	{
 		var totalRegisters = await _context.Users.CountAsync();
-		var totalPages = (totalRegisters / pageSize) == 0 ? 1 : (totalRegisters / pageSize);
+		var totalPages = (int) Math.Ceiling((decimal) totalRegisters / pageSize);
 		return totalPages;
 	}
 

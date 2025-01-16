@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ambev.DeveloperEvaluation.Domain.Aggregates
 {
-	public class Cart :  Aggregate 
+	public class Cart :  Aggregate<int>
 	{
         public DateTime Date { get; set; }
         public Guid UserId { get; set; }
