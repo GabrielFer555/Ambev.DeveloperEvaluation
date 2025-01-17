@@ -4,6 +4,8 @@ using Ambev.DeveloperEvaluation.Application.Carts.DeleteCart;
 using Ambev.DeveloperEvaluation.Application.Carts.GetAllCarts;
 using Ambev.DeveloperEvaluation.Application.Carts.GetCartById;
 using Ambev.DeveloperEvaluation.Application.Carts.UpdateCart;
+using Ambev.DeveloperEvaluation.WebApi.Common;
+using Ambev.DeveloperEvaluation.WebApi.Features.Auth.AuthenticateUserFeature;
 using Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateCart;
 using Ambev.DeveloperEvaluation.WebApi.Features.Carts.DeleteCart;
 using Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetAllCarts;
@@ -23,6 +25,8 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
 	{
 		// GET: api/<CartController>
 		[HttpGet]
+		[ProducesResponseType(typeof(GetAllCartsResponse), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> GetAllProducts([FromQuery] GetAllCartsRequest request, CancellationToken cancellationToken)
 		{
 			var validator = new GetAllCartsRequestValidator();
@@ -36,6 +40,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
 
 		// GET api/<CartController>/5
 		[HttpGet("{id}")]
+		[ProducesResponseType(typeof(GetCartByIdResponse), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> GetCartById([FromRoute] GetCartByIdRequest request, CancellationToken cancellationToken)
 		{
 			var validator = new GetCartByIdRequestValidator();
@@ -49,6 +56,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
 
 		// POST api/<CartController>
 		[HttpPost]
+		[ProducesResponseType(typeof(CreateCartResponse), StatusCodes.Status201Created)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> CreateCart([FromBody] CreateCartRequest request, CancellationToken cancellationToken)
 		{
 			var validator = new CreateCartRequestValidator();
@@ -62,6 +72,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
 
 		// PUT api/<CartController>/5
 		[HttpPut("{id}")]
+		[ProducesResponseType(typeof(UpdateCartResponse), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> UpdateProduct([FromRoute] int id, [FromBody] UpdateCartRequest request, CancellationToken cancellationToken)
 		{
 			request.Id = id;
@@ -78,6 +91,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
 
 		// DELETE api/<CartController>/5
 		[HttpDelete("{id}")]
+		[ProducesResponseType(typeof(DeleteCartResponse), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> Delete([FromRoute] DeleteCartRequest request, CancellationToken cancellationToken)
 		{
 			var validator = new DeleteCartRequestValidator();

@@ -11,6 +11,7 @@ using Ambev.DeveloperEvaluation.WebApi.Features.Users.ListUsers;
 using Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser;
 using Ambev.DeveloperEvaluation.Application.Users.UpdateUser;
 using FluentValidation;
+using Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetAllCarts;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Users;
 
@@ -115,7 +116,9 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllUsers([FromQuery] GetAllUsersRequest request, CancellationToken cancellationToken)
+	[ProducesResponseType(typeof(GetAllUsersResult), StatusCodes.Status200OK)]
+	[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+	public async Task<IActionResult> GetAllUsers([FromQuery] GetAllUsersRequest request, CancellationToken cancellationToken)
     {
 		var validator = new GetAllUsersValidator();
 		var validationResult = await validator.ValidateAsync(request, cancellationToken);

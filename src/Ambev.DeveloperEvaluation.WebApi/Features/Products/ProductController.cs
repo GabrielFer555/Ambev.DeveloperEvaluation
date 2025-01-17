@@ -2,6 +2,7 @@
 using Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
 using Ambev.DeveloperEvaluation.Application.Products.GetCategories;
 using Ambev.DeveloperEvaluation.Application.Products.GetProductsByCategories;
+using Ambev.DeveloperEvaluation.WebApi.Features.Orders.GetOrderById;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetCategories;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProductById;
@@ -18,6 +19,8 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 	{
 
 		[HttpPost]
+		[ProducesResponseType(typeof(CreateProductResponse), StatusCodes.Status201Created)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request, CancellationToken cancellationToken)
 		{
 			var validator = new CreateProductRequestValidator();	
@@ -29,6 +32,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Created($"/products/{response.Id}", response);
 		}
 		[HttpGet]
+		[ProducesResponseType(typeof(GetAllProductsResponse), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> GetAllProducts([FromQuery] GetAllProductsRequest request, CancellationToken cancellationToken)
 		{
 			var validator = new GetAllProductsValidator();
@@ -43,6 +49,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Ok(response);
 		}
 		[HttpGet("{id:int}")]
+		[ProducesResponseType(typeof(GetProductsByIdResult), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> GetProductById([FromRoute] GetProductsByIdRequest request, CancellationToken cancellationToken)
 		{
 			var validator = new GetProductByIdRequestValidator();
@@ -57,6 +66,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Ok(response);
 		}
 		[HttpPut("{id:int}")]
+		[ProducesResponseType(typeof(UpdateProductResponse), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> GetProductById([FromRoute] int id, [FromBody] UpdateProductRequest request, CancellationToken cancellationToken)
 		{
 			var validator = new UpdateProductRequestValidator();
@@ -71,6 +83,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Ok(response);
 		}
 		[HttpGet("categories")]
+		[ProducesResponseType(typeof(GetCategoriesResponse), StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetCategories(CancellationToken cancellationToken)
 		{
 			var result = await sender.Send(new GetCategoriesQuery());
@@ -78,6 +91,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Ok(response.Categories);
 		}
 		[HttpGet("categories/{category}")]
+		[ProducesResponseType(typeof(GetProductsByCategoriesResponse), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> GetProductsByCategories(string category,[FromQuery] QueryPagination queryParams, CancellationToken cancellationToken)
 		{
 			var request = new GetProductsByCategoriesRequest
@@ -98,6 +114,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Ok(response);
 		}
 		[HttpDelete("{id:int}")]
+		[ProducesResponseType(typeof(DeleteProductResponse), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> DeleteProduct([FromRoute] DeleteProductRequest request, CancellationToken cancellation)
 		{
 			var validator = new DeleteProductRequestValidator();
