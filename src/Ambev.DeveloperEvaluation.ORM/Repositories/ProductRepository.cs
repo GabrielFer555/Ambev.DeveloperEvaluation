@@ -85,6 +85,11 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 			{
 				throw new NotFoundException("Product", id);	
 			}
+			var hasOrderWithThatProduct = await _context.OrderItems.AnyAsync( x => x.ProductId == productToBeDeleted.Id);
+			var hasCartWithThatProduct = await _context.CartItems.AnyAsync(x => x.ProductId == productToBeDeleted.Id);
+			if (hasCartWithThatProduct || hasOrderWithThatProduct) {
+				throw new BadRequestException("Impossible to delete product that is in order or cart");
+			}
 			_context.Products.Remove(productToBeDeleted);
 			await _context.SaveChangesAsync();
 

@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using Ambev.DeveloperEvaluation.Domain.Aggregates;
+using Ambev.DeveloperEvaluation.Domain.Events;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories
@@ -13,6 +14,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 			foreach (var item in order.Items) { 
 				item.OrderItemStatus = Domain.Enums.OrderItemStatus.Canceled;
 			}
+			order.AddEvent(new CancelledOrderEvent(id));
 			await context.SaveChangesAsync();
 			return true;
 		}
@@ -21,6 +23,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 		{
 			order.CreatedAt = DateTime.UtcNow;
 			context.Orders.Add(order);
+			order.AddEvent(new OrderCreatedEvent(order));
 			await context.SaveChangesAsync(cancellation);
 			return order;
 		}
@@ -55,6 +58,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 			var orderToBeUpdated = await GetOrderByNumber(order.Id, cancellation);
 			orderToBeUpdated.CustomerId = order.CustomerId;
 			orderToBeUpdated.Items = order.Items;
+
+			order.AddEvent(new UpdatedOrderEvent(order));
+			await context.SaveChangesAsync();
 			return orderToBeUpdated;
 		}
 	}

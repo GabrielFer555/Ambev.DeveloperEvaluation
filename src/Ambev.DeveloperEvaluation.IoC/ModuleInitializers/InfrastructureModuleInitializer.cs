@@ -1,8 +1,10 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.ORM;
+using Ambev.DeveloperEvaluation.ORM.Interceptors;
 using Ambev.DeveloperEvaluation.ORM.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +15,7 @@ public class InfrastructureModuleInitializer : IModuleInitializer
     public void Initialize(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<DbContext>(provider => provider.GetRequiredService<DefaultContext>());
+        builder.Services.AddScoped<DispatchDomainEventsInterceptor>();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
 		builder.Services.AddScoped<IProductRespository, ProductRepository>();
         builder.Services.AddScoped<ICartRepository, CartRepository>();

@@ -7,6 +7,7 @@ using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.IoC;
 using Ambev.DeveloperEvaluation.ORM;
+using Ambev.DeveloperEvaluation.ORM.Interceptors;
 using Ambev.DeveloperEvaluation.WebApi.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -24,18 +25,21 @@ public class Program
 
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             builder.AddDefaultLogging();
-           // builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+            builder.Services.AddExceptionHandler<CustomExceptionHandler>();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
             builder.AddBasicHealthChecks();
             builder.Services.AddSwaggerGen();
-
-            builder.Services.AddDbContext<DefaultContext>(options =>
+            builder.Services.AddDbContext<DefaultContext>((serviceProvider, options) => {
                 options.UseNpgsql(
                     builder.Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
-                )
+                );
+                options.AddInterceptors(
+                    serviceProvider.GetRequiredService<DispatchDomainEventsInterceptor>()
+                    );
+                }
             );
 
             builder.Services.AddJwtAuthentication(builder.Configuration);
@@ -56,7 +60,7 @@ public class Program
            
             var app = builder.Build();
             app.UseMiddleware<ValidationExceptionMiddleware>();
-           // app.UseExceptionHandler(e => { });
+            app.UseExceptionHandler(e => { });
 
             if (app.Environment.IsDevelopment())
             {

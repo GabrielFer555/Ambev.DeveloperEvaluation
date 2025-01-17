@@ -1,5 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Aggregates;
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.ORM.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -41,6 +42,7 @@ public class YourDbContextFactory : IDesignTimeDbContextFactory<DefaultContext>
                connectionString,
                b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.WebApi")
         );
+        
 
         return new DefaultContext(builder.Options);
     }

@@ -50,14 +50,13 @@ public class CustomExceptionHandler
 		{
 			Title = details.Title,
 			Detail = details.Detail,
-			Status = details.StatusCode,
-			Instance = context.Request.Path
+			Status = details.StatusCode
 		};
 
 
 		if (exception is ValidationException validationException)
 		{
-			problemDetails.Extensions.Add("ValidationErrors", validationException.Errors);
+			problemDetails.Detail = validationException.Errors.ToArray()[0].ErrorMessage;
 		}
 
 		await context.Response.WriteAsJsonAsync(problemDetails, cancellationToken: cancellationToken);
