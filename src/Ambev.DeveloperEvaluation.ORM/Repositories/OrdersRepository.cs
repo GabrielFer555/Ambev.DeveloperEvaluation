@@ -59,7 +59,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 			orderToBeUpdated.CustomerId = order.CustomerId;
 			orderToBeUpdated.Items = order.Items;
 
-			order.AddEvent(new UpdatedOrderEvent(order));
+			orderToBeUpdated.AddEvent(new UpdatedOrderEvent(order));
 			await context.SaveChangesAsync();
 			return orderToBeUpdated;
 		}
