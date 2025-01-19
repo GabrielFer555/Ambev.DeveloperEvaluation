@@ -1,8 +1,4 @@
 ﻿
-using Ambev.DeveloperEvaluation.Domain.Aggregates;
-using MediatR;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-
 namespace Ambev.DeveloperEvaluation.ORM.Interceptors
 {
 	public class DispatchDomainEventsInterceptor:SaveChangesInterceptor

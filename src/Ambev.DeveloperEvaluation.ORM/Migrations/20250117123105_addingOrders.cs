@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Ambev.DeveloperEvaluation.WebApi.Migrations
+namespace Ambev.DeveloperEvaluation.ORM.Migrations
 {
     /// <inheritdoc />
     public partial class addingOrders : Migration

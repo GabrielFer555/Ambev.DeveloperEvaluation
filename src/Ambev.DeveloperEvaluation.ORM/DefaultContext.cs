@@ -1,12 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Aggregates;
-using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.ORM.Interceptors;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
-using System.Reflection;
-
-namespace Ambev.DeveloperEvaluation.ORM;
+﻿namespace Ambev.DeveloperEvaluation.ORM;
 
 public class DefaultContext : DbContext
 {
