@@ -1,7 +1,7 @@
 # 🚀 Projeto Ambev.DeveloperEvaluation  
 
 O **Ambev.DeveloperEvaluation** é um desafio técnico criado para avaliar os conhecimentos em **.NET** e **EF Core API**. 🎯  
-Originalmente voltado para **desenvolvedores seniores**, o desafio foi adaptado para testar as habilidades de **devs juniores** ingressando na Ambev Tech.  
+Originalmente voltado para **desenvolvedores seniores**, o desafio foi adaptado para testar as habilidades de **devs juniores** ingressando nos projetos da Ambev Tech.  
 
 O projeto consiste no desenvolvimento de uma API inspirada em um **e-commerce**, com funcionalidades para **carrinho**, **pedido**, **produto** e **usuário**. 🛒📦  
 
