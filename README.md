@@ -82,6 +82,6 @@ Sugestões para melhorias no projeto:
 
 ## 👨‍💻 Autor  
 
-Agradecimento especial a Nathan, Lucas e Róger por seu suporte durante o desenvolvimento desse projeto.
+Agradecimento especial a Nathan, Lucas e Róger pelo suporte prestado durante o desenvolvimento desse projeto.
 
 💡 **Contribuições e feedbacks são muito bem-vindos!** 🚀  
