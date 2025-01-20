@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Ambev.DeveloperEvaluation.Application;
 using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 using Ambev.DeveloperEvaluation.Common.Behaviours;
@@ -28,8 +29,9 @@ public class Program
             builder.Services.AddExceptionHandler<CustomExceptionHandler>();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-
-            builder.AddBasicHealthChecks();
+			builder.Services.AddControllers().AddJsonOptions(options =>
+	        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+			builder.AddBasicHealthChecks();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<DefaultContext>((serviceProvider, options) => {
                 options.UseNpgsql(

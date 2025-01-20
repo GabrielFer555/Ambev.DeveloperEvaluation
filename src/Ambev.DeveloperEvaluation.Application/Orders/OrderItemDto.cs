@@ -11,6 +11,7 @@ namespace Ambev.DeveloperEvaluation.Application.Orders
 		public int ProductId { get; set; }
 		public decimal Price { get; set; }
 		public int Quantity { get; set; }
+		public OrderItemStatus OrderStatus { get; set; }
 		public int Discount { get; set; }
 		public decimal TotalPrice => Quantity * Price;
 		public decimal TotalDiscount { get; set; }

@@ -1,6 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Application.Users;
-using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.Domain.ValueObjects;
+﻿using Ambev.DeveloperEvaluation.Domain.ValueObjects;
+using Newtonsoft.Json;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
 
@@ -32,12 +31,13 @@ public class CreateUserRequest
     /// <summary>
     /// Gets or sets the initial status of the user account.
     /// </summary>
-    public UserStatus Status { get; set; }
-
+    /// 
+    public string Status { get; set; } = string.Empty;
     /// <summary>
     /// Gets or sets the role assigned to the user.
     /// </summary>
-    public UserRole Role { get; set; }
+    /// 
+    public string Role { get; set; } = string.Empty;
     public AddressDto Address { get; set; } = default!;
     public Name Name { get; set; } = default!;
 }

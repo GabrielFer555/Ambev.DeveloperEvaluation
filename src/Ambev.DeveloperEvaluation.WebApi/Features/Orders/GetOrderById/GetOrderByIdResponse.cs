@@ -3,6 +3,7 @@
 	public class GetOrderByIdResponse
 	{
 		public int Id { get; set; }
+		public OrderStatus OrderStatus { get; set; }
 		public Guid CustomerId { get; set; }
 		public string Branch { get; set; } = string.Empty;
 		public DateTime CreatedAt { get; set; }

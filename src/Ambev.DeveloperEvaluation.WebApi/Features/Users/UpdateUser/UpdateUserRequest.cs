@@ -15,9 +15,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser
 
 		public string Email { get; set; } = string.Empty;
 
-		public UserStatus Status { get; set; }
+		public string Status { get; set; } = string.Empty;
 
-		public UserRole Role { get; set; }
+		public string Role { get; set; } = string.Empty;
 
 		public Name Name { get; set; } = default!;
 		public AddressDto Address { get; set; } = default!;

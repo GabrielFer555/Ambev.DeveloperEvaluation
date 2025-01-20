@@ -1,9 +1,15 @@
+using System.ComponentModel;
+
 namespace Ambev.DeveloperEvaluation.Domain.Enums;
 
 public enum UserStatus
 {
-    Unknown = 0,
-    Active,
-    Inactive,
-    Suspended
+	[Description("Unknown")]
+	Unknown = 0,
+	[Description("Active")]
+	Active,
+	[Description("Inactive")]
+	Inactive,
+	[Description("Suspended")]
+	Suspended
 }

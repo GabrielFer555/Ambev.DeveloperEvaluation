@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Users;
+using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Validation;
 using FluentValidation;
@@ -29,8 +30,8 @@ public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
         RuleFor(user => user.Username).NotEmpty().Length(3, 50);
         RuleFor(user => user.Password).SetValidator(new PasswordValidator());
         RuleFor(user => user.Phone).Matches(@"^\+?[1-9]\d{1,14}$");
-        RuleFor(user => user.Status).NotEqual(UserStatus.Unknown);
-        RuleFor(user => user.Role).NotEqual(UserRole.None);
+        RuleFor(user => user.Status).NotEmpty().NotEqual("Unknown").Must(EnumHelper.IsValidEnumDescription<UserStatus>).WithMessage("User Status must be a valid");
+		RuleFor(user => user.Role).NotEmpty().NotEqual("None").Must(EnumHelper.IsValidEnumDescription<UserRole>).WithMessage("User Status must be a valid");
 		RuleFor(user => user.Name).SetValidator(new NameValidator());
 		RuleFor(user => user.Address).SetValidator(new AddressDtoValidator());
 	}
