@@ -62,21 +62,14 @@ Siga os passos abaixo para configurar e rodar o projeto:
 ---
 
 ## ⚠️ Pontos de Atenção  
-
-- 🔒 **Autenticação**:  
-  A API **não possui autenticação**, pois o desenvolvedor ainda está adquirindo conhecimento nessa área no .NET.  
-
 - 🧪 **Testes Unitários**:  
   Testes unitários **não foram implementados**, pelos mesmos motivos.  
 
 ---
 
 ## 🔧 Melhorias Futuras  
-
 Sugestões para melhorias no projeto:  
-
-1. 🔐 Adicionar **autenticação** (ex.: JWT ou integração com OAuth 2.0).  
-2. 🧪 Desenvolver **testes unitários** para validar o comportamento das APIs.  
+1. 🧪 Desenvolver **testes unitários** para validar o comportamento das APIs.  
 
 ---
 
