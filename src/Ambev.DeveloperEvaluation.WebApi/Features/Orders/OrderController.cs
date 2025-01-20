@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Ambev.DeveloperEvaluation.Application.Orders.CancelOrder;
+﻿using Ambev.DeveloperEvaluation.Application.Orders.CancelOrder;
 using Ambev.DeveloperEvaluation.Application.Orders.CreateOrder;
 using Ambev.DeveloperEvaluation.Application.Orders.GetAllOrders;
 using Ambev.DeveloperEvaluation.Application.Orders.GetOrderById;
@@ -7,7 +6,7 @@ using Ambev.DeveloperEvaluation.WebApi.Features.Orders.CancelOrder;
 using Ambev.DeveloperEvaluation.WebApi.Features.Orders.CreateOrder;
 using Ambev.DeveloperEvaluation.WebApi.Features.Orders.GetAllOrders;
 using Ambev.DeveloperEvaluation.WebApi.Features.Orders.GetOrderById;
-using MediatR;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,6 +17,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Orders
 	public class OrderController(ISender sender, IMapper mapper) : ControllerBase
 	{
 		[HttpGet]
+		[Authorize]
 		[ProducesResponseType(typeof(GetAllOrdersResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> GetAllOrders([FromQuery] GetAllOrdersRequest request, CancellationToken cancellationToken)
@@ -33,6 +33,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Orders
 
 
 		[HttpGet("{id:int}")]
+		[Authorize]
 		[ProducesResponseType(typeof(GetOrderByIdResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -50,6 +51,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Orders
 		}
 
 		[HttpPost]
+		[Authorize]
 		[ProducesResponseType(typeof(CreateOrderResponse), StatusCodes.Status201Created)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -66,6 +68,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Orders
 		}
 
 		[HttpPut("{id:int}")]
+		[Authorize]
 		[ProducesResponseType(typeof(UpdateOrderResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -83,6 +86,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Orders
 		}
 
 		[HttpDelete("{id:int}")]
+		[Authorize]
 		[ProducesResponseType(typeof(CancelOrderResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]

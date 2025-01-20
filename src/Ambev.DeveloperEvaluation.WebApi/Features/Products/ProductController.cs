@@ -9,6 +9,7 @@ using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProductById;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProductsByCategories;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
@@ -19,6 +20,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 	{
 
 		[HttpPost]
+		[Authorize]
 		[ProducesResponseType(typeof(CreateProductResponse), StatusCodes.Status201Created)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request, CancellationToken cancellationToken)
@@ -32,6 +34,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Created($"/products/{response.Id}", response);
 		}
 		[HttpGet]
+		[Authorize]
 		[ProducesResponseType(typeof(GetAllProductsResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -49,6 +52,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Ok(response);
 		}
 		[HttpGet("{id:int}")]
+		[Authorize]
 		[ProducesResponseType(typeof(GetProductsByIdResult), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -66,6 +70,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Ok(response);
 		}
 		[HttpPut("{id:int}")]
+		[Authorize]
 		[ProducesResponseType(typeof(UpdateProductResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -83,6 +88,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Ok(response);
 		}
 		[HttpGet("categories")]
+		[Authorize]
 		[ProducesResponseType(typeof(GetCategoriesResponse), StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetCategories(CancellationToken cancellationToken)
 		{
@@ -91,6 +97,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Ok(response.Categories);
 		}
 		[HttpGet("categories/{category}")]
+		[Authorize]
 		[ProducesResponseType(typeof(GetProductsByCategoriesResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -114,6 +121,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 			return Ok(response);
 		}
 		[HttpDelete("{id:int}")]
+		[Authorize]
 		[ProducesResponseType(typeof(DeleteProductResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]

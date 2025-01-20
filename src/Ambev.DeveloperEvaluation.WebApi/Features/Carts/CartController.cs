@@ -13,6 +13,7 @@ using Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetCartById;
 using Ambev.DeveloperEvaluation.WebApi.Features.Carts.UpdateCart;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,6 +26,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
 	{
 		// GET: api/<CartController>
 		[HttpGet]
+		[Authorize]
 		[ProducesResponseType(typeof(GetAllCartsResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> GetAllProducts([FromQuery] GetAllCartsRequest request, CancellationToken cancellationToken)
@@ -40,6 +42,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
 
 		// GET api/<CartController>/5
 		[HttpGet("{id}")]
+		[Authorize]
 		[ProducesResponseType(typeof(GetCartByIdResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -56,6 +59,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
 
 		// POST api/<CartController>
 		[HttpPost]
+		[Authorize]
 		[ProducesResponseType(typeof(CreateCartResponse), StatusCodes.Status201Created)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -72,6 +76,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
 
 		// PUT api/<CartController>/5
 		[HttpPut("{id}")]
+		[Authorize]
 		[ProducesResponseType(typeof(UpdateCartResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -91,6 +96,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
 
 		// DELETE api/<CartController>/5
 		[HttpDelete("{id}")]
+		[Authorize]
 		[ProducesResponseType(typeof(DeleteCartResponse), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
