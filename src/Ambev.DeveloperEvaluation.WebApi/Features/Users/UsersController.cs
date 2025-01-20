@@ -44,14 +44,14 @@ public class UsersController : ControllerBase
     /// <returns>The created user details</returns>
     [HttpPost]
     [ProducesResponseType(typeof(ApiResponseWithData<CreateUserResponse>), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request, CancellationToken cancellationToken)
     {
         var validator = new CreateUserRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
-            return BadRequest(validationResult.Errors);
+            throw new ValidationException(validationResult.Errors);
 
         var command = _mapper.Map<CreateUserCommand>(request);
         var result = await _mediator.Send(command, cancellationToken);
@@ -69,8 +69,8 @@ public class UsersController : ControllerBase
     /// <returns>The user details if found</returns>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetUser([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var request = new GetUserRequest { Id = id };
@@ -95,8 +95,8 @@ public class UsersController : ControllerBase
     /// <returns>Success response if the user was deleted</returns>
     [HttpDelete("{id}")]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteUser([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var request = new DeleteUserRequest { Id = id };
@@ -104,9 +104,9 @@ public class UsersController : ControllerBase
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
-            return BadRequest(validationResult.Errors);
+			throw new ValidationException(validationResult.Errors);
 
-        var command = _mapper.Map<DeleteUserCommand>(request.Id);
+		var command = _mapper.Map<DeleteUserCommand>(request.Id);
         await _mediator.Send(command, cancellationToken);
 
         return Ok(new ApiResponse
@@ -134,8 +134,8 @@ public class UsersController : ControllerBase
 
 	[HttpPut("{id}")]
 	[ProducesResponseType(typeof(UpdateUserResponse), StatusCodes.Status200OK)]
-	[ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-	[ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+	[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request, [FromRoute] Guid id, CancellationToken cancellationToken)
 	{
         request.Id = id;
