@@ -69,7 +69,8 @@ Siga os passos abaixo para configurar e rodar o projeto:
 
 ## 🔧 Melhorias Futuras  
 Sugestões para melhorias no projeto:  
-1. 🧪 Desenvolver **testes unitários** para validar o comportamento das APIs.  
+1. 🧪 Desenvolver **testes unitários** para validar o comportamento das APIs.
+2. ❌ Alterar lógica para permitir cancelamento de items
 
 ---
 
