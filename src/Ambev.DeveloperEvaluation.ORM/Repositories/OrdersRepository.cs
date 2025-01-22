@@ -24,6 +24,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 			var orderItem = order.Items.FirstOrDefault(x => x.ProductId == orderItemId);
 			orderItem!.OrderItemStatus = OrderItemStatus.Canceled;
 
+			order.AddEvent(new OrderItemCancelledEvent(orderItem));
+
 			await context.SaveChangesAsync();
 			return order;
 		}
