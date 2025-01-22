@@ -1,7 +1,6 @@
 ﻿using System.Threading;
-using Ambev.DeveloperEvaluation.Domain.Aggregates;
 using Ambev.DeveloperEvaluation.Domain.Events;
-using Microsoft.EntityFrameworkCore;
+using Ambev.DeveloperEvaluation.Domain.Enums;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories
 {
@@ -17,6 +16,16 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 			order.AddEvent(new CancelledOrderEvent(id));
 			await context.SaveChangesAsync();
 			return true;
+		}
+
+		public async Task<Order> CancelOrderItem(int orderId, int orderItemId, CancellationToken cancelToken = default)
+		{
+			var order = await GetOrderByNumber(orderId);
+			var orderItem = order.Items.FirstOrDefault(x => x.ProductId == orderItemId);
+			orderItem!.OrderItemStatus = OrderItemStatus.Canceled;
+
+			await context.SaveChangesAsync();
+			return order;
 		}
 
 		public async Task<Order> CreateOrder(Order order, CancellationToken cancellation = default)
@@ -57,7 +66,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 		{
 			var orderToBeUpdated = await GetOrderByNumber(order.Id, cancellation);
 			orderToBeUpdated.CustomerId = order.CustomerId;
-			orderToBeUpdated.Items = order.Items;
+			orderToBeUpdated.Branch = order.Branch;
+
 
 			orderToBeUpdated.AddEvent(new UpdatedOrderEvent(order));
 			await context.SaveChangesAsync();

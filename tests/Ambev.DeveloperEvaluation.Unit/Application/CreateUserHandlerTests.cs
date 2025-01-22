@@ -39,7 +39,7 @@ public class CreateUserHandlerTests
     public async Task Handle_ValidRequest_ReturnsSuccessResponse()
     {
         // Given
-        var command = CreateUserHandlerTestData.GenerateValidCommand();
+       // var command = Domain.CreateProductHandlerTests.GenerateValidCommand();
         var user = new User
         {
             Id = Guid.NewGuid(),
@@ -96,7 +96,7 @@ public class CreateUserHandlerTests
     public async Task Handle_ValidRequest_HashesPassword()
     {
         // Given
-        var command = CreateUserHandlerTestData.GenerateValidCommand();
+        var command = Domain.CreateProductHandlerTests.GenerateValidCommand();
         var originalPassword = command.Password;
         const string hashedPassword = "h@shedPassw0rd";
         var user = new User
@@ -132,7 +132,7 @@ public class CreateUserHandlerTests
     public async Task Handle_ValidRequest_MapsCommandToUser()
     {
         // Given
-        var command = CreateUserHandlerTestData.GenerateValidCommand();
+        var command = Domain.CreateProductHandlerTests.GenerateValidCommand();
         var user = new User
         {
             Id = Guid.NewGuid(),

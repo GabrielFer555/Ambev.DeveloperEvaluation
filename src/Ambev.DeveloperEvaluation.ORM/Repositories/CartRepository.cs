@@ -63,5 +63,6 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 			var totalPages = (int)Math.Ceiling((decimal)totalRegisters / pageSize);
 			return totalPages;
 		}
+
 	}
 }

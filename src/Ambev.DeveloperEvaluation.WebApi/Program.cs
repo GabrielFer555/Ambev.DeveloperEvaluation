@@ -26,7 +26,7 @@ public class Program
 
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             builder.AddDefaultLogging();
-            builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+           // builder.Services.AddExceptionHandler<CustomExceptionHandler>();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddControllers().AddJsonOptions(options =>
@@ -64,7 +64,7 @@ public class Program
 			app.UseAutoMigration();
 
 			app.UseMiddleware<ValidationExceptionMiddleware>();
-            app.UseExceptionHandler(e => { });
+           // app.UseExceptionHandler(e => { });
 
             if (app.Environment.IsDevelopment())
             {

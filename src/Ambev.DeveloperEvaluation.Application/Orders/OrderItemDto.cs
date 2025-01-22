@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Ambev.DeveloperEvaluation.Application.Orders
 {
 	public class OrderItemResponseDto
@@ -42,7 +37,7 @@ namespace Ambev.DeveloperEvaluation.Application.Orders
 	public class OrderItemDtoProfile : Profile {
 		public OrderItemDtoProfile() {
 			CreateMap<OrderItemCommandDto, OrderItem>().ConstructUsing(e => new OrderItem(e.ProductId, e.Price, e.Quantity));
-			CreateMap<OrderItem, OrderItemResponseDto>();
+			CreateMap<OrderItem, OrderItemResponseDto>().ForMember(dest => dest.OrderStatus, opt => opt.MapFrom(src => src.OrderItemStatus)); ;
 		}
 	}
 }

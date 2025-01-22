@@ -14,5 +14,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Repositories
 		Task<bool> CancelOrder(int id, CancellationToken cancelToken = default);
 		Task<List<Order>> GetAllOrders(int page, int limit, CancellationToken cancellation = default);
 		Task<int> GetPagesTotal(int limit, CancellationToken cancellationToken = default);
+		Task<Order> CancelOrderItem(int orderId, int orderItemId, CancellationToken cancelToken = default);
+
 	}
 }

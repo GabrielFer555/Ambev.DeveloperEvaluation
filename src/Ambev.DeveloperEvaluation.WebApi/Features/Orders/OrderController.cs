@@ -1,8 +1,10 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Orders.CancelOrder;
+using Ambev.DeveloperEvaluation.Application.Orders.CancelOrderItem;
 using Ambev.DeveloperEvaluation.Application.Orders.CreateOrder;
 using Ambev.DeveloperEvaluation.Application.Orders.GetAllOrders;
 using Ambev.DeveloperEvaluation.Application.Orders.GetOrderById;
 using Ambev.DeveloperEvaluation.WebApi.Features.Orders.CancelOrder;
+using Ambev.DeveloperEvaluation.WebApi.Features.Orders.CancelOrderItem;
 using Ambev.DeveloperEvaluation.WebApi.Features.Orders.CreateOrder;
 using Ambev.DeveloperEvaluation.WebApi.Features.Orders.GetAllOrders;
 using Ambev.DeveloperEvaluation.WebApi.Features.Orders.GetOrderById;
@@ -98,6 +100,22 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Orders
 			var command = mapper.Map<CancelOrderCommand>(request);
 			var result = await sender.Send(command);	
 			var response = mapper.Map<CancelOrderResponse>(result);
+			return Ok(response);
+
+		}
+		[HttpDelete("{orderId:int}/items/{orderItemId:int}")]
+		[Authorize]
+		[ProducesResponseType(typeof(CancelOrderItemResponse), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+		public async Task<IActionResult> CancelOrder([FromRoute] CancelOrderItemRequest request, CancellationToken cancellationToken)
+		{
+			var validator = new CancelOrderItemRequestValidator();
+			var isValid = await validator.ValidateAsync(request, cancellationToken);
+			if (!isValid.IsValid) throw new ValidationException(isValid.Errors);
+			var command = mapper.Map<CancelOrderItemCommand>(request);
+			var result = await sender.Send(command);
+			var response = mapper.Map<CancelOrderItemResponse>(result);
 			return Ok(response);
 
 		}

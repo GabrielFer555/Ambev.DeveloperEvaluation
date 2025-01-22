@@ -9,7 +9,7 @@ namespace Ambev.DeveloperEvaluation.Unit.Domain;
 /// This class centralizes all test data generation to ensure consistency
 /// across test cases and provide both valid and invalid data scenarios.
 /// </summary>
-public static class CreateUserHandlerTestData
+public static class CreateProductHandlerTestsData
 {
     /// <summary>
     /// Configures the Faker to generate valid User entities.
