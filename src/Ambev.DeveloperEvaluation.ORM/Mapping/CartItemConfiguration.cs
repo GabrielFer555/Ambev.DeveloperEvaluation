@@ -8,7 +8,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Mapping
 			builder.ToTable(nameof(CartItem));
 			builder.Property(x => x.Id).ValueGeneratedOnAdd();
 			builder.Property(x => x.Quantity).IsRequired();
-			builder.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId);
+			builder.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId)
+				.OnDelete(DeleteBehavior.Restrict);
 		}
 	}
 }

@@ -7,8 +7,10 @@
 			builder.ToTable("Orders");
 			builder.HasKey(x=> x.Id);
 			builder.Property(x => x.Id).ValueGeneratedOnAdd();
-			builder.HasOne<User>().WithMany().HasForeignKey(x => x.CustomerId).IsRequired();
-			builder.HasMany<OrderItem>(c => c.Items).WithOne().HasForeignKey(x => x.OrderId).IsRequired();
+			builder.HasOne<User>().WithMany().HasForeignKey(x => x.CustomerId).IsRequired()
+					.OnDelete(DeleteBehavior.Restrict);
+			builder.HasMany<OrderItem>(c => c.Items).WithOne().HasForeignKey(x => x.OrderId).IsRequired()
+							.OnDelete(DeleteBehavior.Cascade);
 			builder.Property(u => u.OrderStatus)
 			.HasConversion<string>()
 			.HasMaxLength(30);

@@ -10,7 +10,8 @@
 			builder.Property(x => x.Quantity).IsRequired();
 			builder.Property(x => x.Price).IsRequired();
 			builder.Property(x => x.Discount).IsRequired();
-			builder.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId);
+			builder.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId)
+				.OnDelete(DeleteBehavior.Restrict);
 			builder.Property(u => u.OrderItemStatus)
 			.HasConversion<string>()
 			.HasMaxLength(30);
