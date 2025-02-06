@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProductById
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProductById
 {
 	public class GetProductByIdRequestValidator:AbstractValidator<GetProductsByIdRequest>
 	{

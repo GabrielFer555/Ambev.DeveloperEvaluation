@@ -1,8 +1,4 @@
-﻿
-
-using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
-
-namespace Ambev.DeveloperEvaluation.Application.Users.UpdateUser
+﻿namespace Ambev.DeveloperEvaluation.Application.Users.UpdateUser
 {
 	public class UpdateUserProfile:Profile
 	{

@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace Ambev.DeveloperEvaluation.Domain.Enums;
 
 public enum UserRole

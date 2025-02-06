@@ -1,9 +1,4 @@
-﻿
-
-using Ambev.DeveloperEvaluation.Domain.Common;
-using FluentValidation;
-
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser
 {
 	public class UpdateUserRequestValidator:AbstractValidator<UpdateUserRequest>
 	{

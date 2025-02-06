@@ -1,7 +1,4 @@
-﻿using System.Data;
-using FluentValidation;
-
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct
 {
 	public class UpdateProductRequestValidator:AbstractValidator<UpdateProductRequest>
 	{

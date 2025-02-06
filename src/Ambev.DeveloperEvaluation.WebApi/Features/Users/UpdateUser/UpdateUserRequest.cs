@@ -1,8 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Users;
-using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.Domain.ValueObjects;
-
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser
 {
 	public class UpdateUserRequest
 	{

@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace Ambev.DeveloperEvaluation.Domain.Validation;
+﻿namespace Ambev.DeveloperEvaluation.Domain.Validation;
 
 public class PasswordValidator : AbstractValidator<string>
 {

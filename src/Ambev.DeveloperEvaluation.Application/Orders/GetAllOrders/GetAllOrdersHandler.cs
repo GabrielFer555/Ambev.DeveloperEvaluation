@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ambev.DeveloperEvaluation.Application.Carts.GetAllCarts;
-
-namespace Ambev.DeveloperEvaluation.Application.Orders.GetAllOrders
+﻿namespace Ambev.DeveloperEvaluation.Application.Orders.GetAllOrders
 {
 	public class GetAllOrdersHandler(IOrdersRepository repository) : IRequestHandler<GetAllOrdersQuery, GetAllOrdersResult>
 	{

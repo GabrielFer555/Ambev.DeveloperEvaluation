@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ambev.DeveloperEvaluation.Domain.Validation;
-
-namespace Ambev.DeveloperEvaluation.Application.Carts.UpdateCart
+﻿namespace Ambev.DeveloperEvaluation.Application.Carts.UpdateCart
 {
 	public class UpdateCartCommandValidator:AbstractValidator<UpdateCartCommand>
 	{

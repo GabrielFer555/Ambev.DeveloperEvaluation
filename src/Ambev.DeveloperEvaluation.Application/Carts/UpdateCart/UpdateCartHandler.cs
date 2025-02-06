@@ -1,6 +1,4 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Carts.UpdateCart;
-using Ambev.DeveloperEvaluation.Domain.Aggregates;
-
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts.UpdateCart
 {
 	public class UpdateCartHandler(IMapper mapper, ICartRepository repository, IProductRespository productRepository, IUserRepository userRepository) : IRequestHandler<UpdateCartCommand, UpdateCartResult>

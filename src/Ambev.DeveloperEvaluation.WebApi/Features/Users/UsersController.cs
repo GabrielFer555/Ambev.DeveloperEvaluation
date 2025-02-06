@@ -5,14 +5,10 @@ using Ambev.DeveloperEvaluation.WebApi.Features.Users.DeleteUser;
 using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 using Ambev.DeveloperEvaluation.Application.Users.GetUser;
 using Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Ambev.DeveloperEvaluation.Application.Users.GetAllUsers;
 using Ambev.DeveloperEvaluation.WebApi.Features.Users.ListUsers;
 using Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser;
 using Ambev.DeveloperEvaluation.Application.Users.UpdateUser;
-using FluentValidation;
-using Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetAllCarts;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Users;
 
@@ -48,12 +44,6 @@ public class UsersController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request, CancellationToken cancellationToken)
     {
-        var validator = new CreateUserRequestValidator();
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
-        if (!validationResult.IsValid)
-            throw new ValidationException(validationResult.Errors);
-
         var command = _mapper.Map<CreateUserCommand>(request);
         var result = await _mediator.Send(command, cancellationToken);
         var response = _mapper.Map<CreateUserResponse>(result);
@@ -76,12 +66,6 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> GetUser([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var request = new GetUserRequest { Id = id };
-        var validator = new GetUserRequestValidator();
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
-        if (!validationResult.IsValid)
-            throw new ValidationException(validationResult.Errors);
-
         var command = _mapper.Map<GetUserQuery>(request.Id);
         var result = await _mediator.Send(command, cancellationToken);
         var response = _mapper.Map<GetUserResponse>(result);
@@ -103,13 +87,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> DeleteUser([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var request = new DeleteUserRequest { Id = id };
-        var validator = new DeleteUserRequestValidator();
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
-        if (!validationResult.IsValid)
-			throw new ValidationException(validationResult.Errors);
-
-		var command = _mapper.Map<DeleteUserCommand>(request.Id);
+     	var command = _mapper.Map<DeleteUserCommand>(request.Id);
         await _mediator.Send(command, cancellationToken);
 
         return Ok(new ApiResponse
@@ -123,12 +101,7 @@ public class UsersController : ControllerBase
 	[ProducesResponseType(typeof(GetAllUsersResult), StatusCodes.Status200OK)]
 	[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> GetAllUsers([FromQuery] GetAllUsersRequest request, CancellationToken cancellationToken)
-    {
-		var validator = new GetAllUsersValidator();
-		var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
-		if (!validationResult.IsValid)
-			throw new ValidationException(validationResult.Errors);
+    { 
 		var query = _mapper.Map<GetAllUsersQuery>(request);
         var result = await _mediator.Send(query, cancellationToken);
         var response = _mapper.Map<GetAllUsersResult>(result);
@@ -144,10 +117,6 @@ public class UsersController : ControllerBase
 	public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request, [FromRoute] Guid id, CancellationToken cancellationToken)
 	{
         request.Id = id;
-        var validator = new UpdateUserRequestValidator();
-        var isBodyValid = await validator.ValidateAsync(request, cancellationToken);
-        if (!isBodyValid.IsValid) throw new ValidationException(isBodyValid.Errors);
-
 		var command = _mapper.Map<UpdateUserCommand>(request);
 		var result = await _mediator.Send(command, cancellationToken);
 		var response = _mapper.Map<UpdateUserResponse>(result);

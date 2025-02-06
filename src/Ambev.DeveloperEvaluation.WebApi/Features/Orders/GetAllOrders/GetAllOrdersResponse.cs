@@ -1,6 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Aggregates;
-
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Orders.GetAllOrders
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Orders.GetAllOrders
 {
 	public class GetAllOrdersResponse
 	{

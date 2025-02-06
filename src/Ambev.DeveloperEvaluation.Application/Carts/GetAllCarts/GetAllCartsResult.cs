@@ -1,6 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Aggregates;
-
-namespace Ambev.DeveloperEvaluation.Application.Carts.GetAllCarts
+﻿namespace Ambev.DeveloperEvaluation.Application.Carts.GetAllCarts
 {
 	public class GetAllCartsResult
 	{

@@ -1,7 +1,4 @@
-﻿
-using MediatR;
-
-namespace Ambev.DeveloperEvaluation.Application.Products.GetProductById
+﻿namespace Ambev.DeveloperEvaluation.Application.Products.GetProductById
 {
 	public class GetProductsByIdHandler (IProductRespository repository) : IRequestHandler<GetProductsByIdQuery, GetProductsByIdResult>
 	{

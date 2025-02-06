@@ -1,9 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Exceptions;
-using Ambev.DeveloperEvaluation.Domain.ValueObjects;
-using FluentValidation;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.IdentityModel.Tokens;
-namespace Ambev.DeveloperEvaluation.Common.Behaviours;
+﻿namespace Ambev.DeveloperEvaluation.Common.Behaviours;
 public class CustomExceptionHandler
 	(ILogger<CustomExceptionHandler> logger)
 	: IExceptionHandler

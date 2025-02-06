@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ambev.DeveloperEvaluation.Domain.Common
+﻿namespace Ambev.DeveloperEvaluation.Domain.Common
 {
 	public class EnumHelper
 	{
@@ -23,7 +16,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Common
 		private static string GetEnumDescription(Enum value)
 		{
 			var field = value.GetType().GetField(value.ToString());
-			var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute))!;
+			var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field!, typeof(DescriptionAttribute))!;
 			return attribute?.Description ?? value.ToString(); // Fallback to enum name if no description is found
 		}
 	}

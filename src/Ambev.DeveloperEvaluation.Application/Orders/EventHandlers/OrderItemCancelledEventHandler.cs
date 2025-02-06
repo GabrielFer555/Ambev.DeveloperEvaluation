@@ -1,7 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Events;
-using Microsoft.Extensions.Logging;
-
-namespace Ambev.DeveloperEvaluation.Application.Orders.EventHandlers
+﻿namespace Ambev.DeveloperEvaluation.Application.Orders.EventHandlers
 {
 	public class OrderItemCancelledEventHandler(ILogger<OrderItemCancelledEventHandler> logger) : INotificationHandler<OrderItemCancelledEvent>
 	{

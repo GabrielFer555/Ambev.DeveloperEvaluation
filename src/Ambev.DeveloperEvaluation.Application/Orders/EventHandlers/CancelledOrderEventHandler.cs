@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ambev.DeveloperEvaluation.Domain.Events;
-using Microsoft.Extensions.Logging;
-
-namespace Ambev.DeveloperEvaluation.Application.Orders.EventHandlers
+﻿namespace Ambev.DeveloperEvaluation.Application.Orders.EventHandlers
 {
 	public class CancelledOrderEventHandler(ILogger<CancelledOrderEventHandler> logger) : INotificationHandler<CancelledOrderEvent>
 	{

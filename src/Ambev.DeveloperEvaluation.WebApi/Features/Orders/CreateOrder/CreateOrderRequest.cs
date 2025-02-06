@@ -1,6 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Orders;
-
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Orders.CreateOrder
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Orders.CreateOrder
 {
     public class CreateOrderRequest
     {

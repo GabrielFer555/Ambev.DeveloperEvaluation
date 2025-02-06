@@ -1,5 +1,3 @@
-using FluentValidation;
-
 namespace Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
 
 /// <summary>

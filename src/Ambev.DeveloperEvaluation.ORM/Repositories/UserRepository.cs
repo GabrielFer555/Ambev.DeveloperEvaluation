@@ -1,9 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
-using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-
-namespace Ambev.DeveloperEvaluation.ORM.Repositories;
+﻿namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 
 public class UserRepository : IUserRepository
 {

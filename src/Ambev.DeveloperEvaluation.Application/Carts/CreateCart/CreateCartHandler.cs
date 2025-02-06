@@ -1,6 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.ORM.Repositories;
-
-namespace Ambev.DeveloperEvaluation.Application.Carts.CreateCart
+﻿namespace Ambev.DeveloperEvaluation.Application.Carts.CreateCart
 {
     public class CreateCartHandler (ICartRepository repository, IMapper mapper, IUserRepository userRepository, IProductRespository productRepository) : IRequestHandler<CreateCartCommand, CreateCartResult>
 	{

@@ -1,16 +1,11 @@
 ﻿
-using Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
 using Ambev.DeveloperEvaluation.Application.Products.GetCategories;
 using Ambev.DeveloperEvaluation.Application.Products.GetProductsByCategories;
-using Ambev.DeveloperEvaluation.WebApi.Features.Orders.GetOrderById;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetCategories;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProductById;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProductsByCategories;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct;
-using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 {
@@ -40,12 +35,6 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> GetAllProducts([FromQuery] GetAllProductsRequest request, CancellationToken cancellationToken)
 		{
-			var validator = new GetAllProductsValidator();
-			var isRequestValid = await validator.ValidateAsync(request, cancellationToken);
-			if (!isRequestValid.IsValid)
-			{
-				throw new ValidationException(isRequestValid.Errors);
-			}
 			var command = mapper.Map<GetAllProductsQuery>(request);
 			var result = await sender.Send(command);
 			var response = mapper.Map<GetAllProductsResponse>(result);
@@ -58,12 +47,6 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> GetProductById([FromRoute] GetProductsByIdRequest request, CancellationToken cancellationToken)
 		{
-			var validator = new GetProductByIdRequestValidator();
-			var isRequestValid = await validator.ValidateAsync(request, cancellationToken);
-			if (!isRequestValid.IsValid)
-			{
-				throw new ValidationException(isRequestValid.Errors);
-			}
 			var query = mapper.Map<GetProductsByIdQuery>(request);
 			var result = await sender.Send(query);
 			var response = mapper.Map<GetProductsByIdResult>(result);
@@ -76,11 +59,6 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> GetProductById([FromRoute] int id, [FromBody] UpdateProductRequest request, CancellationToken cancellationToken)
 		{
-			var validator = new UpdateProductRequestValidator();
-			var validBody = await validator.ValidateAsync(request, cancellationToken);
-			if (!validBody.IsValid) {
-				throw new ValidationException(validBody.Errors);
-			}
 			var command = mapper.Map<UpdateProductCommand>(request);
 			command.Id = id;
 			var result = await sender.Send(command);
@@ -109,12 +87,6 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 				_Limit = queryParams._Limit,
 				_Page = queryParams._Page
 			};
-			var validator = new GetProductsByCategoriesRequestValidator();
-			var validBody = await validator.ValidateAsync(request, cancellationToken);
-			if (!validBody.IsValid)
-			{
-				throw new ValidationException(validBody.Errors);
-			}
 			var query = mapper.Map<GetProductsByCategoriesQuery>(request);
 			var result = await sender.Send(query);
 			var response = mapper.Map<GetProductsByCategoriesResponse>(result);
@@ -127,12 +99,6 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> DeleteProduct([FromRoute] DeleteProductRequest request, CancellationToken cancellation)
 		{
-			var validator = new DeleteProductRequestValidator();
-			var isRequestBodyValid = await validator.ValidateAsync(request);
-			if (!isRequestBodyValid.IsValid)
-			{
-				throw new ValidationException(isRequestBodyValid.Errors);
-			}
 			var command = mapper.Map<DeleteProductCommand>(request);
 			var result = await sender.Send(command);
 			var response = mapper.Map<DeleteProductResponse>(result);

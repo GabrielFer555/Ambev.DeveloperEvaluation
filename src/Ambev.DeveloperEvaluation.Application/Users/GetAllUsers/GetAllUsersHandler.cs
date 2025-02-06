@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ambev.DeveloperEvaluation.Application.Users.GetUser;
+﻿using Ambev.DeveloperEvaluation.Application.Users.GetUser;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.GetAllUsers
 {

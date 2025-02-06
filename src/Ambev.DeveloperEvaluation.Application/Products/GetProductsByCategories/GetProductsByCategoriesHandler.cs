@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
-
-namespace Ambev.DeveloperEvaluation.Application.Products.GetProductsByCategories
+﻿namespace Ambev.DeveloperEvaluation.Application.Products.GetProductsByCategories
 {
 	public class GetProductsByCategoriesHandler(IProductRespository repository) : IRequestHandler<GetProductsByCategoriesQuery, GetProductsByCategoriesResult>
 	{

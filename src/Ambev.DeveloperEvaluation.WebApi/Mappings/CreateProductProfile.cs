@@ -1,8 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
-using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
-using Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
-
-namespace Ambev.DeveloperEvaluation.WebApi.Mappings
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Mappings
 {
     public class CreateProductProfile : Profile
     {

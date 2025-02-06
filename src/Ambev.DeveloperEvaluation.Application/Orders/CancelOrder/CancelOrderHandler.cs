@@ -1,6 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Orders.CreateOrder;
-
-namespace Ambev.DeveloperEvaluation.Application.Orders.CancelOrder
+﻿namespace Ambev.DeveloperEvaluation.Application.Orders.CancelOrder
 {
 	public class CancelOrderHandler(IOrdersRepository repository) : IRequestHandler<CancelOrderCommand, CancelOrderResult>
 	{

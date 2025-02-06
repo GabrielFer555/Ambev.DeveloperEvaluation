@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using Ambev.DeveloperEvaluation.Domain.Entities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Reflection.Emit;
-
-namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
+﻿namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 
 /// <summary>
 /// Profile for mapping between User entity and CreateUserResponse

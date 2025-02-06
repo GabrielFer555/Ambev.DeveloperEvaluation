@@ -1,6 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Aggregates;
-using Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetCartById;
-
+﻿
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetAllCarts
 {
 	public class GetAllCartsResponse

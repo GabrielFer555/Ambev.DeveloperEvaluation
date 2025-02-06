@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
 	public class CartItem:Entity<int>

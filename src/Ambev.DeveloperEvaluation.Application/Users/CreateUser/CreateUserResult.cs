@@ -1,7 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Common.Security;
-using Ambev.DeveloperEvaluation.Domain.Enums;
-
-namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
+﻿namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 
 /// <summary>
 /// Represents the response returned after successfully creating a new user.

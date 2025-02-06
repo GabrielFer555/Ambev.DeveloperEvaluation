@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ambev.DeveloperEvaluation.Domain.Validation;
-using static Ambev.DeveloperEvaluation.Application.Users.NameValidator;
-
-namespace Ambev.DeveloperEvaluation.Application.Users.UpdateUser
+﻿namespace Ambev.DeveloperEvaluation.Application.Users.UpdateUser
 {
 	public class UpdateUserCommandValidator:AbstractValidator<UpdateUserCommand>
 	{

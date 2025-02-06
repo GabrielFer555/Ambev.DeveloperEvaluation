@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ambev.DeveloperEvaluation.Application.Carts.GetAllCarts
+﻿namespace Ambev.DeveloperEvaluation.Application.Carts.GetAllCarts
 {
 	internal class GetAllCartsHandler (ICartRepository repository) : IRequestHandler<GetAllCartsQuery, GetAllCartsResult>
 	{

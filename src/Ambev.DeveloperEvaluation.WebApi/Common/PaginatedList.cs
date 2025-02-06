@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
+﻿
 namespace Ambev.DeveloperEvaluation.WebApi.Common;
 
 public class PaginatedList<T> : List<T>

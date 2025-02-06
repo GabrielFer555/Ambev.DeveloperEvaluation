@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ambev.DeveloperEvaluation.Domain.Aggregates;
-
-namespace Ambev.DeveloperEvaluation.ORM.Repositories
+﻿namespace Ambev.DeveloperEvaluation.ORM.Repositories
 {
 	public class CartRepository(DefaultContext _context) : ICartRepository
 	{

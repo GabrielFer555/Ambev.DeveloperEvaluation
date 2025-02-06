@@ -1,8 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.Domain.Validation;
-using FluentValidation;
-using static Ambev.DeveloperEvaluation.Application.Users.NameValidator;
-
+﻿
 namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 
 /// <summary>

@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Ambev.DeveloperEvaluation.Domain.Events;
+﻿using Ambev.DeveloperEvaluation.Domain.Events;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories

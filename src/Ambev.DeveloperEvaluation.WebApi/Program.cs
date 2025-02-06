@@ -1,7 +1,5 @@
 using System.Text.Json.Serialization;
 using Ambev.DeveloperEvaluation.Application;
-using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
-using Ambev.DeveloperEvaluation.Common.Behaviours;
 using Ambev.DeveloperEvaluation.Common.HealthChecks;
 using Ambev.DeveloperEvaluation.Common.Logging;
 using Ambev.DeveloperEvaluation.Common.Security;
@@ -10,9 +8,7 @@ using Ambev.DeveloperEvaluation.IoC;
 using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.ORM.Interceptors;
 using Ambev.DeveloperEvaluation.WebApi.Middleware;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Serilog;
+
 
 namespace Ambev.DeveloperEvaluation.WebApi;
 

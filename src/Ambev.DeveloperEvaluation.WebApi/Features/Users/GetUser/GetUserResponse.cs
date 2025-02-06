@@ -1,16 +1,7 @@
-using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.Domain.ValueObjects;
-
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser;
 
-/// <summary>
-/// API response model for GetUser operation
-/// </summary>
 public class GetUserResponse
 {
-	/// <summary>
-	/// The unique identifier of the user
-	/// </summary>
 	public Guid Id { get; set; } = default!;
 	public string Username { get; set; } = string.Empty;
 

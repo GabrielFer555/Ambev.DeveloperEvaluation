@@ -1,6 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Aggregates;
-
-namespace Ambev.DeveloperEvaluation.Application.Orders.CreateOrder
+﻿namespace Ambev.DeveloperEvaluation.Application.Orders.CreateOrder
 {
 	public class CreateOrderHandler(IOrdersRepository repository, IProductRespository productRepository, IUserRepository userRepository ,IMapper mapper) : IRequestHandler<CreateOrderCommand, CreateOrderResult>
 	{

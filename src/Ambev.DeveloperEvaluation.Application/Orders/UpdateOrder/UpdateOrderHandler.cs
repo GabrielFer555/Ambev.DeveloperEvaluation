@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ambev.DeveloperEvaluation.Application.Orders.CreateOrder;
-
-namespace Ambev.DeveloperEvaluation.Application.Orders.UpdateOrder
+﻿namespace Ambev.DeveloperEvaluation.Application.Orders.UpdateOrder
 {
 	public class UpdateOrderHandler(IOrdersRepository repository, IMapper mapper) : IRequestHandler<UpdateOrderCommand, UpdateOrderResult>
 	{

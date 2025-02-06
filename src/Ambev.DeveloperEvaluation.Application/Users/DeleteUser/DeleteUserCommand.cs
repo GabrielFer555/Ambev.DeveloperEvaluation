@@ -1,5 +1,3 @@
-using MediatR;
-
 namespace Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
 
 /// <summary>

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ambev.DeveloperEvaluation.Domain.Enums;
-
-namespace Ambev.DeveloperEvaluation.Application.Users.UpdateUser
+﻿namespace Ambev.DeveloperEvaluation.Application.Users.UpdateUser
 {
 	public class UpdateUserResult
 	{

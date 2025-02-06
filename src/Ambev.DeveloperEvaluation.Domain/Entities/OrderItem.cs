@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Ambev.DeveloperEvaluation.Domain.Entities
+﻿namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
     public class OrderItem : Entity<int>
     {

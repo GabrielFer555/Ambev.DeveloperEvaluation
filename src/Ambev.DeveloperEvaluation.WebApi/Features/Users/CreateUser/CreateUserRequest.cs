@@ -1,7 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.ValueObjects;
-using Newtonsoft.Json;
-
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
 
 /// <summary>
 /// Represents a request to create a new user in the system.

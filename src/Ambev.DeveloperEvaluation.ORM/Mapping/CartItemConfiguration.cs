@@ -1,6 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Aggregates;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+﻿
 namespace Ambev.DeveloperEvaluation.ORM.Mapping
 {
 	public class CartItemConfiguration : IEntityTypeConfiguration<CartItem>

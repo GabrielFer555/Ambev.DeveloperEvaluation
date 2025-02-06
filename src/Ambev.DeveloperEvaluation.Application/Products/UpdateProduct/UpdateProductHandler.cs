@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace Ambev.DeveloperEvaluation.Application.Products.UpdateProduct
+﻿namespace Ambev.DeveloperEvaluation.Application.Products.UpdateProduct
 {
 	public class UpdateProductHandler(IProductRespository repository, IMapper mapper): IRequestHandler<UpdateProductCommand, UpdateProductResult>
 	{

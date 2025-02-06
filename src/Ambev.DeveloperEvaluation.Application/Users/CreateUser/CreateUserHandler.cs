@@ -1,11 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
-using FluentValidation;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
-using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.Common.Security;
-
-namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
+﻿namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 
 /// <summary>
 /// Handler for processing CreateUserCommand requests
