@@ -1,6 +1,6 @@
 ﻿namespace Ambev.DeveloperEvaluation.Application.Carts.DeleteCart
 {
-	internal class DeleteCartHandler (IMapper mapper, ICartRepository repository) : IRequestHandler<DeleteCartCommand, DeleteCartResult>
+	internal class DeleteCartHandler (ICartRepository repository) : IRequestHandler<DeleteCartCommand, DeleteCartResult>
 	{
 		public async Task<DeleteCartResult> Handle(DeleteCartCommand request, CancellationToken cancellationToken)
 		{

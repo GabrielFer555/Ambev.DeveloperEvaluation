@@ -2,6 +2,6 @@
 {
 	public class GetCategoriesResponse
 	{
-		public List<string> Categories { get; set; }
+		public List<string> Categories { get; set; } = new();
 	}
 }

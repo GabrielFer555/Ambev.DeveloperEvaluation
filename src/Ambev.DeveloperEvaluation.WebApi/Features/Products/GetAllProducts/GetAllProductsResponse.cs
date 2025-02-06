@@ -2,7 +2,7 @@
 {
 	public class GetAllProductsResponse
 	{
-		public IEnumerable<Product> Data { get; set; }
+		public IEnumerable<Product> Data { get; set; } = default!;
 		public int Page { get; set; }
 		public int Limit { get; set; }
 		public int TotalPages { get; set; }

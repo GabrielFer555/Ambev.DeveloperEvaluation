@@ -2,6 +2,6 @@
 {
 	public class DeleteProductResult
 	{
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
     }
 }
