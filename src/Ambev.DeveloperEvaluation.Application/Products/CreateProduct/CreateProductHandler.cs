@@ -26,7 +26,7 @@
 				Title = createdProduct.Title,
 			};
 		}
-		public Product CreateNewProduct(CreateProductCommand request)
+		public virtual Product CreateNewProduct(CreateProductCommand request)
 		{
 			Product product = Product.Create(request.Price, request.Title, request.Description, request.Category, request.Image,
 				ProductRating.Of(request.Rating.Count, request.Rating.Rating));

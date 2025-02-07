@@ -10,7 +10,7 @@
 
 			var updatedModel = Product.Create(request.Price, request.Title, request.Description, request.Category, request.Image,
 				ProductRating.Of(request.Rating.Count, request.Rating.Rating));
-			var updatedProduct = await repository.UpdateProductAsync(updatedModel, request.Id, cancellationToken);
+			var updatedProduct = await repository.UpdateProductAsync(updatedModel, request.Id, cancellationToken); //its returning null
 			var result = mapper.Map<UpdateProductResult>(updatedProduct);
 			return result;
 		}
