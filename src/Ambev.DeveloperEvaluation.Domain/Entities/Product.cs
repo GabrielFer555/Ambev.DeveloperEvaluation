@@ -11,7 +11,7 @@
         public string Image { get; private set; } = default!;
         public ProductRating ProductRating { get; private set; } = default!;
 
-        private Product() { }
+        public Product() { }
 		private Product(decimal price, string title, string description, string category, string image, ProductRating productRating)
         {
             Price = price;
