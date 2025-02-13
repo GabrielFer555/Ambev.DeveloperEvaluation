@@ -68,6 +68,7 @@ namespace Ambev.DeveloperEvaluation.Integration.Products
 		[Fact]
 		public async Task UpdateProduct_ValidProduct_ReturnsProduct()
 		{
+			//arrange
             var createdProduct = CreateProductTestData.GenerateValidData();
 			var updateProduct = UpdateProductTestData.GenerateValidData();
             var productCreated = await _httpClient.PostAsJsonAsync("/api/Product", createdProduct);
@@ -132,6 +133,7 @@ namespace Ambev.DeveloperEvaluation.Integration.Products
 		[Fact]
  		public async Task DeleteProduct_When_ProductHasOrder_ReturnsException()
 		{
+			//arrange
 			var product = CreateProductTestData.GenerateValidData();
 			var user = CreateUserTestData.GenerateValidCommand();
 			
