@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Ambev.DeveloperEvaluation.Application;
+using Ambev.DeveloperEvaluation.Common.Behaviours;
 using Ambev.DeveloperEvaluation.Common.HealthChecks;
 using Ambev.DeveloperEvaluation.Common.Logging;
 using Ambev.DeveloperEvaluation.Common.Security;
@@ -22,7 +23,7 @@ public class Program
 
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             builder.AddDefaultLogging();
-           // builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+            builder.Services.AddExceptionHandler<CustomExceptionHandler>();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddControllers().AddJsonOptions(options =>
@@ -60,7 +61,7 @@ public class Program
 			app.UseAutoMigration();
 
 			app.UseMiddleware<ValidationExceptionMiddleware>();
-           // app.UseExceptionHandler(e => { });
+            app.UseExceptionHandler(e => { });
 
             if (app.Environment.IsDevelopment())
             {
@@ -81,8 +82,7 @@ public class Program
         }
         catch (Exception ex)
         {
-            throw;
-            //Log.Fatal(ex, "Application terminated unexpectedly");
+            Log.Fatal(ex, "Application terminated unexpectedly");
         }
         finally
         {

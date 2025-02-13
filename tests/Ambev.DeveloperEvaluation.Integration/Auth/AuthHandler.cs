@@ -1,33 +1,49 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Text.Encodings.Web;
+using Ambev.DeveloperEvaluation.Integration.Products;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Ambev.DeveloperEvaluation.Integration.Auth
 {
-	public class AuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+	public static class AuthHandler
 	{
-		public AuthHandler(
-			IOptionsMonitor<AuthenticationSchemeOptions> options,
-			ILoggerFactory logger,
-			UrlEncoder encoder
-		) : base(options, logger, encoder) { }
 
-		protected override Task<AuthenticateResult> HandleAuthenticateAsync()
-		{
-			var claims = new[]
-			{
-				new Claim(ClaimTypes.NameIdentifier, "test-user"),
-				new Claim(ClaimTypes.Name, "Test User"),
-				new Claim(ClaimTypes.Role, "Admin") // Adiciona um papel para passar pela autorização
-			};
+        public static string GenerateJwtToken()
+        {
+            var configuration = new ConfigurationBuilder()
+                .AddUserSecrets<ProductControllerTests>()
+                .Build();
 
-			var identity = new ClaimsIdentity(claims, "TestingPurposes");
-			var principal = new ClaimsPrincipal(identity);
-			var ticket = new AuthenticationTicket(principal, "TestScheme");
+            var secretKey = configuration["Jwt:SecretKey"];
 
-			return Task.FromResult(AuthenticateResult.Success(ticket));
-		}
-	}
+            if (string.IsNullOrEmpty(secretKey))
+            {
+                throw new Exception("JWT Secret Key is missing. Ensure it is set in User Secrets.");
+            }
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+        new Claim(ClaimTypes.NameIdentifier, "test-user"),
+        new Claim(ClaimTypes.Name, "Test User"),
+        new Claim(ClaimTypes.Role, "Admin")
+    };
+
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(60),
+                signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+    }
 }

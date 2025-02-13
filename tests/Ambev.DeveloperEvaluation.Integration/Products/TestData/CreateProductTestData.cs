@@ -1,10 +1,8 @@
-﻿using Ambev.DeveloperEvaluation.Application.Products;
-using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
-using Bogus;
+﻿using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 
 namespace Ambev.DeveloperEvaluation.Integration.Products.TestData
 {
-	public static class CreateProductTestData
+    public static class CreateProductTestData
 	{
 		private static readonly Faker<CreateProductRequest> FakeData = new Faker<CreateProductRequest>()
 			.RuleFor(x => x.Description, f => f.Commerce.ProductDescription())

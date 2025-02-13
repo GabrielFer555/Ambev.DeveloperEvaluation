@@ -1,1 +1,9 @@
 ﻿global using Xunit;
+global using FluentAssertions;
+global using Bogus;
+global using Ambev.DeveloperEvaluation.Integration.Auth;
+global using Ambev.DeveloperEvaluation.Application.Orders;
+global using Ambev.DeveloperEvaluation.Application.Products;
+global using Ambev.DeveloperEvaluation.Application.Users;
+global using Ambev.DeveloperEvaluation.Domain.Enums;
+global using Ambev.DeveloperEvaluation.Domain.ValueObjects;

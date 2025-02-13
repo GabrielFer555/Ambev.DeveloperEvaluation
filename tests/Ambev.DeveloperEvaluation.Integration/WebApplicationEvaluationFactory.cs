@@ -19,9 +19,6 @@ namespace Ambev.DeveloperEvaluation.Integration
 				services.RemoveAll(typeof(DbContextOptions<DefaultContext>));
 
 				var connString = GetConnectionString();
-
-				services.AddAuthentication("TestScheme")
-			   .AddScheme<AuthenticationSchemeOptions, AuthHandler>("TestingPurposes", options => { });
 			
 
 			services.AddNpgsql<DefaultContext>(connString);
