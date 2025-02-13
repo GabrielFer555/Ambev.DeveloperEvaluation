@@ -154,7 +154,7 @@ namespace Ambev.DeveloperEvaluation.Integration.Products
                 new Faker<OrderItemCommandDto>().RuleFor(x => x.ProductId, f => 1)
                 .RuleFor(x => x.Price, f => decimal.Parse(f.Commerce.Price()))
                 .RuleFor(x => x.Quantity, f => f.Random.Int(1, 20)).Generate(1)
-            );
+            ).Generate();
 
 
             var productCreated = await _httpClient.PostAsJsonAsync("/api/Product", product);
@@ -165,7 +165,7 @@ namespace Ambev.DeveloperEvaluation.Integration.Products
 			orderCreated.EnsureSuccessStatusCode();
 
 			//act
-			var response = await _httpClient.DeleteAsync($"/api/Order/{productCreatedResponseBody!.Id}");
+			var response = await _httpClient.DeleteAsync($"/api/Product/{productCreatedResponseBody!.Id}");
 
 			//assert
 			response.Should().NotBeNull();
