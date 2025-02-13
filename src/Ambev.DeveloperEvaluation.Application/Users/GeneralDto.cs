@@ -1,15 +1,43 @@
 ﻿namespace Ambev.DeveloperEvaluation.Application.Users
 {
-	public record GeolocationDto(string Lat, string Long);
+	public record GeolocationDto
+	{
+		public string Lat { get; set; } = string.Empty;
+		public string Long { get; set; } = string.Empty ;
+		public GeolocationDto()
+		{
+			
+		}
+
+		public GeolocationDto(string Lat, string Long)
+		{
+			this.Lat = Lat;
+			this.Long = Long;
+		}
+	};
 
 
-	public record AddressDto(
-		string City,
-		string Street,
-		int Number,
-		string Zipcode,
-		GeolocationDto Geolocation
-	);
+	public record AddressDto
+	{
+		public string City { get; set; } = string.Empty;
+		public string Street { get; set; } = string.Empty ;
+		public int Number { get; set; }
+		public string Zipcode { get; set; } = string.Empty;
+		public GeolocationDto Geolocation { get; set; } = default!;
+		public AddressDto()
+		{
+			
+		}
+
+		public AddressDto(string City, string Street, int Number, string Zipcode, GeolocationDto Geolocation)
+		{
+			this.City = City;
+			this.Street = Street;
+			this.Number = Number;
+			this.Zipcode = Zipcode;
+			this.Geolocation = Geolocation;
+		}
+	}
 	public class NameValidator : AbstractValidator<Name>
 	{
 		public NameValidator()

@@ -1,15 +1,11 @@
-﻿using Ambev.DeveloperEvaluation.Application;
-using Ambev.DeveloperEvaluation.Application.Orders;
+﻿using Ambev.DeveloperEvaluation.Application.Orders;
 using Ambev.DeveloperEvaluation.Application.Orders.CreateOrder;
-using Ambev.DeveloperEvaluation.Domain.Aggregates;
 using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.Domain.Exceptions;
 using Ambev.DeveloperEvaluation.Domain.ValueObjects;
-using NSubstitute;
 
 namespace Ambev.DeveloperEvaluation.Unit.Application.Orders
 {
-    public class CreateOrderHandlerTests
+	public class CreateOrderHandlerTests
     {
 
         private readonly IMapper mapper;
@@ -21,7 +17,7 @@ namespace Ambev.DeveloperEvaluation.Unit.Application.Orders
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.AddMaps(typeof(ApplicationLayer).Assembly); // Replace with your main assembly
+                cfg.AddMaps(typeof(ApplicationLayer).Assembly); 
             });
             mapper = config.CreateMapper();
         
@@ -79,7 +75,6 @@ namespace Ambev.DeveloperEvaluation.Unit.Application.Orders
             //assert    
             result.Should().NotBeNull();
             result.Should().BeAssignableTo<CreateOrderResult>();
-            result.Items.ForEach(x => x.TotalDiscount.Should().BeLessThan(x.TotalPrice));
             result.Items.ForEach(x => x.TotalDiscount.Should().BeLessThan(x.TotalPrice));
             foreach (var item in result.Items)
             {

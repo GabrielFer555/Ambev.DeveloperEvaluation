@@ -38,8 +38,4 @@
 		<ProjectReference Include="..\..\src\Ambev.DeveloperEvaluation.ORM\Ambev.DeveloperEvaluation.ORM.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Application\TestData\" />
-	</ItemGroup>
-
 </Project>

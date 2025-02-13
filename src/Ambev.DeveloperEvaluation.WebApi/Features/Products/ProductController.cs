@@ -15,7 +15,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 	{
 
 		[HttpPost]
-		[Authorize]
+		[Authorize(AuthenticationSchemes = "TestScheme")] // Define o esquema explicitamente
 		[ProducesResponseType(typeof(CreateProductResponse), StatusCodes.Status201Created)]
 		[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request, CancellationToken cancellationToken)

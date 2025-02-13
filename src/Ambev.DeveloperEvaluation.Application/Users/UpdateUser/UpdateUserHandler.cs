@@ -1,9 +1,4 @@
-﻿
-using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
-using FluentValidation;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-
-namespace Ambev.DeveloperEvaluation.Application.Users.UpdateUser
+﻿namespace Ambev.DeveloperEvaluation.Application.Users.UpdateUser
 {
 	public class UpdateUserHandler(IUserRepository repository, IMapper _mapper, IPasswordHasher passwordHasher) : IRequestHandler<UpdateUserCommand, UpdateUserResult>
 	{
