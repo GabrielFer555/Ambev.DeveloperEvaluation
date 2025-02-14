@@ -8,8 +8,8 @@ namespace Ambev.DeveloperEvaluation.Integration.Users
 {
     public class UserControllerTests
     {
-        public HttpClient _httpClient { get; private set; }
-        public WebApplicationEvaluationFactory _evaluationFactory { get; private set; }
+        private readonly HttpClient _httpClient;
+        private readonly WebApplicationEvaluationFactory _evaluationFactory;
 
         public UserControllerTests()
         {

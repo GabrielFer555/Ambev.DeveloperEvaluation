@@ -12,8 +12,8 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders
 {
     public class OrderControllerTests
     {
-        public HttpClient _httpClient { get; private set; }
-        public WebApplicationEvaluationFactory _evaluationFactory { get; private set; }
+        private readonly HttpClient _httpClient;
+        private readonly WebApplicationEvaluationFactory _evaluationFactory;
 
         public OrderControllerTests()
         {
@@ -25,16 +25,16 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders
         [Fact]
         public async Task CreateOrder_ValidOrderWithoutDiscount_ReturnsOrderWithNoDiscount()
         {
-               //arrange
-               var user = await CreateUser();
-               var product = await CreateProductsForOrders();
-                var fakeData = new Faker<CreateOrderRequest>()
-                 .RuleFor(x => x.CustomerId, f => user.Id)
-                 .RuleFor(x => x.Branch, f => f.Commerce.Department())
-                 .RuleFor(x => x.Items, f => new Faker<OrderItemCommandDto>()
-                    .RuleFor(x => x.ProductId, f => product.Id)
-                    .RuleFor(x => x.Quantity, f => f.Random.Int(1, 3))
-                    .RuleFor(x => x.Price, f => product.Price).Generate(1)).Generate();
+            //arrange
+            var user = await CreateUser();
+            var product = await CreateProductsForOrders();
+            var fakeData = new Faker<CreateOrderRequest>()
+             .RuleFor(x => x.CustomerId, f => user.Id)
+             .RuleFor(x => x.Branch, f => f.Commerce.Department())
+             .RuleFor(x => x.Items, f => new Faker<OrderItemCommandDto>()
+                .RuleFor(x => x.ProductId, f => product.Id)
+                .RuleFor(x => x.Quantity, f => f.Random.Int(1, 3))
+                .RuleFor(x => x.Price, f => product.Price).Generate(1)).Generate();
 
 
             //act
@@ -55,9 +55,21 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders
                 item.Discount.Should().Be(0);
                 item.TotalDiscount.Should().Be(item.TotalPrice);
             }
-       
-        }
 
+        }
+        [Fact]
+        public async Task CreateOrder_InvalidOrder_ReturnsException()
+        {
+            var fakeData = new Faker<CreateOrderRequest>()
+             .RuleFor(x => x.CustomerId, f => Guid.NewGuid())
+             .RuleFor(x => x.Branch, f => f.Commerce.Department()).Generate();
+
+
+            //act
+            var createOrderRequest = await _httpClient.PostAsJsonAsync("/api/Order", fakeData);
+
+            createOrderRequest.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
+        }
         [Fact]
         public async Task CreateOrder_ValidOrder_10Percent_Discount_ReturnsOrderWithDiscount()
         {
@@ -137,8 +149,8 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders
             var newCustomer = await CreateUser();
             var orderUpdate = new Faker<UpdateOrderRequest>()
                 .RuleFor(x => x.Id, f => orderCreated.Id)
-                .RuleFor(x => x.CustomerId, f=> newCustomer.Id)
-                .RuleFor(x => x.Branch, f=> f.Commerce.Department()).Generate();
+                .RuleFor(x => x.CustomerId, f => newCustomer.Id)
+                .RuleFor(x => x.Branch, f => f.Commerce.Department()).Generate();
 
             //act
             var updateOrderRequest = await _httpClient.PutAsJsonAsync($"/api/Order/{orderCreated.Id}", orderUpdate);
@@ -177,10 +189,85 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders
         [Fact]
         public async Task CancelOrderItem_ForOrderWithMoreThanOneItem_OnlyOneItemIsCancelled()
         {
-                    
+            var user = await CreateUser();
+            var product1 = await CreateProductsForOrders();
+            var product2 = await CreateProductsForOrders();
+
+            var fakeData = new Faker<CreateOrderRequest>()
+                .RuleFor(x => x.CustomerId, f => user.Id)
+                .RuleFor(x => x.Branch, f => f.Commerce.Department())
+                .RuleFor(x => x.Items, f => new List<OrderItemCommandDto>
+                {
+            new OrderItemCommandDto { ProductId = product1.Id, Quantity = 2, Price = product1.Price },
+            new OrderItemCommandDto { ProductId = product2.Id, Quantity = 3, Price = product2.Price }
+                }).Generate();
+
+            var createOrderRequest = await _httpClient.PostAsJsonAsync("/api/Order", fakeData);
+            createOrderRequest.EnsureSuccessStatusCode();
+            var order = await createOrderRequest.Content.ReadFromJsonAsync<OrderResponseDto>();
+
+            var itemToCancel = order!.Items.First();
+            var cancelItemRequest = await _httpClient.DeleteAsync($"/api/Order/{order.Id}/Items/{itemToCancel.ProductId}");
+            cancelItemRequest.EnsureSuccessStatusCode();
+
+            var getOrder = await _httpClient.GetAsync($"/api/Order/{order.Id}");
+            getOrder.EnsureSuccessStatusCode();
+            var updatedOrder = await getOrder.Content.ReadFromJsonAsync<GetOrderResponseDto>();
+
+            updatedOrder.Should().NotBeNull();
+            updatedOrder.Items.Should().NotBeEmpty();
+
+            var canceledItem = updatedOrder.Items.FirstOrDefault(x => x.ProductId == itemToCancel.ProductId);
+            canceledItem.Should().NotBeNull();
+            canceledItem.OrderStatus.Should().Be("Canceled");
+
+            var activeItems = updatedOrder.Items.Where(x => x.ProductId != itemToCancel.ProductId);
+            activeItems.Should().NotBeEmpty();
+            activeItems.All(x => x.OrderStatus != "Canceled").Should().BeTrue();
         }
 
-        private async Task<UserUtilityResponse> CreateUser() {
+        [Fact]
+        public async Task CancelOrderItem_CancelAllOrderItems_ShouldCancelOrder()
+        {
+            var user = await CreateUser();
+            var product1 = await CreateProductsForOrders();
+            var product2 = await CreateProductsForOrders();
+
+            var fakeData = new Faker<CreateOrderRequest>()
+                .RuleFor(x => x.CustomerId, f => user.Id)
+                .RuleFor(x => x.Branch, f => f.Commerce.Department())
+                .RuleFor(x => x.Items, f => new List<OrderItemCommandDto>
+                {
+            new OrderItemCommandDto { ProductId = product1.Id, Quantity = 2, Price = product1.Price },
+            new OrderItemCommandDto { ProductId = product2.Id, Quantity = 3, Price = product2.Price }
+                }).Generate();
+
+            var createOrderRequest = await _httpClient.PostAsJsonAsync("/api/Order", fakeData);
+            createOrderRequest.EnsureSuccessStatusCode();
+            var order = await createOrderRequest.Content.ReadFromJsonAsync<OrderResponseDto>();
+
+            foreach (var item in order!.Items)
+            {
+                var cancelItemRequest = await _httpClient.DeleteAsync($"/api/Order/{order.Id}/Items/{item.ProductId}");
+                cancelItemRequest.EnsureSuccessStatusCode();
+            }
+
+
+            var getOrder = await _httpClient.GetAsync($"/api/Order/{order.Id}");
+            getOrder.EnsureSuccessStatusCode();
+            var updatedOrder = await getOrder.Content.ReadFromJsonAsync<GetOrderResponseDto>();
+
+            updatedOrder.Should().NotBeNull();
+            updatedOrder.Items.Should().NotBeEmpty();
+            updatedOrder.Items.Any(x => x.OrderStatus != "Canceled").Should().BeFalse();
+            updatedOrder.OrderStatus.Should().Be("Canceled");
+            updatedOrder.TotalPrice.Should().Be(0);
+
+
+        }
+
+        private async Task<UserUtilityResponse> CreateUser()
+        {
             var user = CreateUserTestData.GenerateValidCommand();
 
             //act
@@ -190,7 +277,8 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders
             return response!;
         }
 
-        private async Task<CreateProductResponse> CreateProductsForOrders() {
+        private async Task<CreateProductResponse> CreateProductsForOrders()
+        {
             var requestBody = CreateProductTestData.GenerateValidData();
             var result = await _httpClient.PostAsJsonAsync("/api/Product", requestBody);
             result.EnsureSuccessStatusCode();
