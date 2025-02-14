@@ -1,12 +1,13 @@
-﻿using Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
-using System.Text.RegularExpressions;
+﻿using Ambev.DeveloperEvaluation.Integration.Users.Utility;
+using Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser;
 
 namespace Ambev.DeveloperEvaluation.Integration.Users.TestData
 {
-    public static class CreateUserTestData
+    public static class UpdateUserTestData
     {
-        private static readonly Faker<CreateUserRequest> createUserHandlerFaker = new Faker<CreateUserRequest>()
-            .RuleFor(x => x.Username, f => f.Internet.UserName())
+        private static Faker<UpdateUserRequest> FakeData = new Faker<UpdateUserRequest>()
+                .RuleFor(x => x.Id, f => f.Random.Uuid())
+                .RuleFor(x => x.Username, f => f.Internet.UserName())
                 .RuleFor(x => x.Password, f => UserUtility.GenerateValidPassword())
                 .RuleFor(x => x.Phone, f => $"+55{f.Random.Number(11, 99)}{f.Random.Number(100000000, 999999999)}")
                 .RuleFor(x => x.Email, f => f.Internet.Email())
@@ -25,9 +26,9 @@ namespace Ambev.DeveloperEvaluation.Integration.Users.TestData
                 .RuleFor(x => x.Status, f => "Active")
                 .RuleFor(x => x.Role, f => "Admin");
 
-        public static CreateUserRequest GenerateValidCommand()
+        public static UpdateUserRequest GenerateValidData()
         {
-            return createUserHandlerFaker.Generate();
+            return FakeData.Generate();
         }
     }
 }

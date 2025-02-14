@@ -3,7 +3,6 @@ using Ambev.DeveloperEvaluation.Integration.Products.TestData;
 using Ambev.DeveloperEvaluation.Integration.Users.TestData;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct;
-using Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
 using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Net.Http.Headers;
@@ -142,10 +141,8 @@ namespace Ambev.DeveloperEvaluation.Integration.Products
 			userCreated.EnsureSuccessStatusCode();
             var jsonResponse = await userCreated.Content.ReadAsStringAsync();
 
-            // Parse the JSON
             using var document = JsonDocument.Parse(jsonResponse);
 
-            // Navigate to data -> id
             var root = document.RootElement;
             var idValue = root.GetProperty("id").GetString();
 
