@@ -61,17 +61,6 @@ Siga os passos abaixo para configurar e rodar o projeto:
 
 ---
 
-## ⚠️ Pontos de Atenção  
-- 🧪 **Testes Unitários**:  
-  Testes unitários **ainda não foram implementados**, devido o desenvolvedor ainda estar aprendendo sobre.  
-
----
-
-## 🔧 Melhorias Futuras  
-Sugestões para melhorias no projeto:  
-1. 🧪 Desenvolver **testes unitários** para validar o comportamento das APIs.
----
-
 ## 👨‍💻 Autor  
 
 Agradecimento especial a Nathan, Rennã, Lucas e Róger pelo suporte prestado durante o desenvolvimento desse projeto.
