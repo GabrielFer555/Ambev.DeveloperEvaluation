@@ -1,32 +1,32 @@
-﻿using Ambev.DeveloperEvaluation.Integration.Orders.Utility;
+﻿using Ambev.DeveloperEvaluation.Integration.Orders.TestData;
+using Ambev.DeveloperEvaluation.Integration.Orders.Utility;
 using Ambev.DeveloperEvaluation.Integration.Products.TestData;
 using Ambev.DeveloperEvaluation.Integration.Users.TestData;
 using Ambev.DeveloperEvaluation.Integration.Users.Utility;
 using Ambev.DeveloperEvaluation.WebApi.Features.Orders.CreateOrder;
 using Ambev.DeveloperEvaluation.WebApi.Features.Orders.UpdateOrder;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 
 namespace Ambev.DeveloperEvaluation.Integration.Orders
 {
-    public class OrderControllerTests
+	[Collection("Ambev.DeveloperEvaluation")] 
+	public class OrderControllerTests
     {
         private readonly HttpClient _httpClient;
         private readonly WebApplicationEvaluationFactory _evaluationFactory;
 
         public OrderControllerTests()
         {
-            _evaluationFactory = new WebApplicationEvaluationFactory();
-            _httpClient = _evaluationFactory.CreateClient();
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthHandler.GenerateJwtToken());
-        }
+			_evaluationFactory = new WebApplicationEvaluationFactory();
+			_httpClient = _evaluationFactory.CreateClient();
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthHandler.GenerateJwtToken());
+		}
 
         [Fact]
         public async Task CreateOrder_ValidOrderWithoutDiscount_ReturnsOrderWithNoDiscount()
         {
-            //arrange
-            var user = await CreateUser();
+			//arrange
+			var user = await CreateUser();
             var product = await CreateProductsForOrders();
             var fakeData = new Faker<CreateOrderRequest>()
              .RuleFor(x => x.CustomerId, f => user.Id)
@@ -60,7 +60,8 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders
         [Fact]
         public async Task CreateOrder_InvalidOrder_ReturnsException()
         {
-            var fakeData = new Faker<CreateOrderRequest>()
+
+			var fakeData = new Faker<CreateOrderRequest>()
              .RuleFor(x => x.CustomerId, f => Guid.NewGuid())
              .RuleFor(x => x.Branch, f => f.Commerce.Department()).Generate();
 
@@ -73,8 +74,8 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders
         [Fact]
         public async Task CreateOrder_ValidOrder_10Percent_Discount_ReturnsOrderWithDiscount()
         {
-            //arrange
-            var user = await CreateUser();
+			//arrange
+			var user = await CreateUser();
             var product = await CreateProductsForOrders();
             var fakeData = new Faker<CreateOrderRequest>()
              .RuleFor(x => x.CustomerId, f => user.Id)
@@ -229,7 +230,7 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders
         [Fact]
         public async Task CancelOrderItem_CancelAllOrderItems_ShouldCancelOrder()
         {
-            var user = await CreateUser();
+			var user = await CreateUser();
             var product1 = await CreateProductsForOrders();
             var product2 = await CreateProductsForOrders();
 
@@ -265,8 +266,23 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders
 
 
         }
+        [Fact]
+        public async Task CreateOrder_OrderWithNoItems_ShouldReturnException()
+        {
+            //arrange
 
-        private async Task<UserUtilityResponse> CreateUser()
+            var order = CreateOrderTestData.GenerateValidData();
+            order.Items = new();
+
+            //act
+            var act = await _httpClient.PostAsJsonAsync("/api/Order", order);
+
+            //assert
+            act.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+		}
+
+		private async Task<UserUtilityResponse> CreateUser()
         {
             var user = CreateUserTestData.GenerateValidCommand();
 

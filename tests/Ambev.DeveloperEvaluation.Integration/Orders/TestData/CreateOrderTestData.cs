@@ -12,6 +12,11 @@ namespace Ambev.DeveloperEvaluation.Integration.Orders.TestData
                 .RuleFor(x => x.Price, f => decimal.Parse(f.Commerce.Price()))
                 .RuleFor(x => x.Quantity, f => f.Random.Int(1, 20)).Generate(2)
             );
+
+        public static CreateOrderCommand GenerateValidData()
+        {
+            return fakeData.Generate();
+        }
  
             
     }

@@ -1,12 +1,11 @@
 ﻿using Ambev.DeveloperEvaluation.Integration.Users.TestData;
 using Ambev.DeveloperEvaluation.Integration.Users.Utility;
 using Ambev.DeveloperEvaluation.WebApi.Common;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 
 namespace Ambev.DeveloperEvaluation.Integration.Users
 {
-    public class UserControllerTests
+	[Collection("Ambev.DeveloperEvaluation")]
+	public class UserControllerTests
     {
         private readonly HttpClient _httpClient;
         private readonly WebApplicationEvaluationFactory _evaluationFactory;

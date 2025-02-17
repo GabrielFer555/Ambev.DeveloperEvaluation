@@ -4,14 +4,11 @@ using Ambev.DeveloperEvaluation.Integration.Users.TestData;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct;
 using Microsoft.AspNetCore.Http;
-using System.Net;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text.Json;
 
 namespace Ambev.DeveloperEvaluation.Integration.Products
 {
-    public class ProductControllerTests
+	[Collection("Ambev.DeveloperEvaluation")]
+	public class ProductControllerTests
 	{
 		private readonly WebApplicationEvaluationFactory _evaluationFactory;
 		private readonly HttpClient _httpClient;

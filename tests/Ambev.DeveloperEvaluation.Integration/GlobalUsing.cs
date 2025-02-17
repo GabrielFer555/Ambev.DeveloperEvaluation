@@ -1,9 +1,12 @@
-﻿global using Xunit;
-global using FluentAssertions;
-global using Bogus;
-global using Ambev.DeveloperEvaluation.Integration.Auth;
+﻿global using System.Net;
+global using System.Net.Http.Headers;
+global using System.Net.Http.Json;
+global using System.Text.Json;
 global using Ambev.DeveloperEvaluation.Application.Orders;
 global using Ambev.DeveloperEvaluation.Application.Products;
 global using Ambev.DeveloperEvaluation.Application.Users;
-global using Ambev.DeveloperEvaluation.Domain.Enums;
 global using Ambev.DeveloperEvaluation.Domain.ValueObjects;
+global using Ambev.DeveloperEvaluation.Integration.Auth;
+global using Bogus;
+global using FluentAssertions;
+global using Xunit;
